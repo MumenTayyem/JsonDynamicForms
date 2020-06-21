@@ -1,0 +1,107 @@
+{
+    "fields": [
+        {
+            "type": "text",
+            "name": "name",
+            "validators": [
+                {
+                    "type": "required",
+                    "errorMessage": "this field is required!"
+                },
+                {
+                    "type": "pattern",
+                    "errorMessage": "invalid text",
+                    "regex": "[0-9]{2,}"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "name": "name2",
+            "validators": [
+                {
+                    "type": "required",
+                    "errorMessage": "this field is required!"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "name": "genderId",
+            "validators": [
+                {
+                    "type": "required",
+                    "errorMessage": "this field is required!"
+                }
+            ],
+            "options": [
+                {
+                    "value": 1,
+                    "name": "male"
+                },
+                {
+                    "value": 2,
+                    "name": "female"
+                }
+            ],
+            "mapper": {
+                "arguments": "options",
+                "body": "const arr=[]; options.forEach(option=>{arr.push({'value':option.id,'name':option.title})});return arr.slice(0,6);"
+            },
+            "fetch": true,
+            "api": "https://jsonplaceholder.typicode.com/posts"
+        },
+        {
+            "type": "radio",
+            "name": "communicationWayId",
+            "validators": [
+                {
+                    "type": "required",
+                    "errorMessage": "this field is required!"
+                }
+            ],
+            "radios": [
+                {
+                    "value": 1,
+                    "name": "mobile"
+                },
+                {
+                    "value": 2,
+                    "name": "email"
+                }
+            ],
+            "mapper": {
+                "arguments": "options",
+                "body": "const arr=[]; options.forEach(option=>{arr.push({'value':option.id,'name':option.title})});return arr.slice(0,6);"
+            },
+            "fetch": false,
+            "api": "https://jsonplaceholder.typicode.com/posts"
+        },
+        {
+            "type": "checkbox",
+            "name": "favouriteAnimals",
+            "validators": [
+                {
+                    "type": "atLeastOne",
+                    "errorMessage": "at least one checkbox is required"
+                }
+            ],
+            "checkboxes": [
+                {
+                    "value": 10,
+                    "name": "dogs"
+                },
+                {
+                    "value": 20,
+                    "name": "cats"
+                }
+            ],
+            "mapper": {
+                "arguments": "options",
+                "body": "const arr=[]; options.forEach(option=>{arr.push({'value':option.id,'name':option.title})});return arr.slice(0,6);"
+            },
+            "fetch": false,
+            "api": "https://jsonplaceholder.typicode.com/posts"
+        }
+    ]
+}

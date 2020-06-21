@@ -1,0 +1,13 @@
+<form [formGroup]='customFormGroup'>
+    <div *ngIf='checkboxes'>
+      <label>{{name}}</label>
+      <div [formArrayName]="name" *ngFor='let checkbox of checkboxes;let i =index'>
+        <input [formControlName]="i"  type="checkbox"  [name]="name">{{checkbox.name}}
+      </div>
+    </div>
+    <div *ngFor='let validation of validations'>
+      <div *ngIf='isSubmittedFlag && getControlValidationStatus(validation.type)=="invalid"'>
+        {{validation.errorMessage}}
+      </div>
+    </div>
+  </form>

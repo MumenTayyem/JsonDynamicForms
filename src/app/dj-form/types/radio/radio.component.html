@@ -1,0 +1,13 @@
+<form [formGroup]='customFormGroup'>
+  <div *ngIf='options'>
+    <label>{{name}}</label>
+    <div *ngFor='let option of options'>
+      <input type="radio" [value]='option.value' [formControlName]='name' [name]="name">{{option.name}}
+    </div>
+  </div>
+  <div *ngFor='let validation of validations'>
+    <div *ngIf='isSubmittedFlag && getControlValidationStatus(validation.type)=="invalid"'>
+      {{validation.errorMessage}}
+    </div>
+  </div>
+</form>
