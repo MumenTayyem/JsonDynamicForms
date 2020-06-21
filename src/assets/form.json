@@ -74,7 +74,7 @@
                 "arguments": "options",
                 "body": "const arr=[]; options.forEach(option=>{arr.push({'value':option.id,'name':option.title})});return arr.slice(0,6);"
             },
-            "fetch": false,
+            "fetch": true,
             "api": "https://jsonplaceholder.typicode.com/posts"
         },
         {

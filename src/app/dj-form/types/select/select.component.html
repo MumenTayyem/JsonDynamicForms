@@ -2,7 +2,7 @@
     <div>
       <label>{{name}}</label>
         <select [formControlName]='name'>
-          <option value=''>--select--</option>
+          <option value=''>--Please Select--</option>
           <option *ngFor='let option of options' [value]='option.value'>{{option.name}}</option>
         </select>
     </div>
