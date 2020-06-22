@@ -80,15 +80,18 @@ export class FormControlHostComponent implements OnInit {
           validators.push(Validators.minLength(validation.value));
           break;
         case 'before':
-          formValidators.push(before(this.controlInfo.name, '2020-06-22'));
+          formValidators.push(before(this.controlInfo.name, validation.value));
           break;
         case 'after':
-          formValidators.push(after(this.controlInfo.name, '2020-06-10'));
+          formValidators.push(after(this.controlInfo.name, validation.value));
           break;
       }
     });
+    // this.customFormGroup.setValidators(formValidators);
+    if (this.customFormGroup.validator){
+      formValidators.push(this.customFormGroup.validator);
+    }
     this.customFormGroup.setValidators(formValidators);
-    
     (<TextComponent>componentRef.instance).validations = validations;
 
     //add it to the form

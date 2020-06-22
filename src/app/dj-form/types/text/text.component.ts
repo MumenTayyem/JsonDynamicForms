@@ -24,6 +24,9 @@ export class TextComponent extends FormControl implements OnInit {
   }
 
   getControlValidationStatus(type) {
+    if (type== 'before' || type == 'after'){
+      type=type+this.name;
+    }
     return ((this.customFormGroup.controls[this.name].errors && this.customFormGroup.controls[this.name].errors[type])
       || (this.customFormGroup.errors && this.customFormGroup.errors[type])
     ) ? 'invalid' : 'valid';
@@ -45,29 +48,30 @@ export function before(controlName: string, beforeValue: string): ValidatorFn {
       let controlDate = new Date(controlValue);
       let beforeDate = new Date(beforeValue);
       if (controlDate >= beforeDate) {
-        return { before: true };
+        
+        return { ['before'+controlName]: true };
       } else {
         return null;
       }
     } else {
-      return { before: true };
+      return { ['before'+controlName]: true };
     }
   }
 }
 
-export function after(controlName: string, beforeValue: string): ValidatorFn {
+export function after(controlName: string, afterValue: string): ValidatorFn {
   return (group: FormGroup): ValidationErrors | null => {
     let controlValue = group.controls[controlName].value;
     if (controlValue) {
       let controlDate = new Date(controlValue);
-      let beforeDate = new Date(beforeValue);
-      if (controlDate <= beforeDate) {
-        return { after: true };
+      let afterDate = new Date(afterValue);
+      if (controlDate <= afterDate) {
+        return { ['after'+controlName]: true };
       } else {
         return null;
       }
     } else {
-      return { after: true };
+      return { ['after'+controlName]: true };
     }
   }
 }

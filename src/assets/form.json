@@ -11,11 +11,34 @@
                 },
                 {
                     "type":"before",
-                    "errorMessage":"this field must be before today"
+                    "errorMessage":"this field must be before today",
+                    "value":"2020-06-22"
                 },
                 {
                     "type":"after",
-                    "errorMessage":"this field must be after 2020-06-10"
+                    "errorMessage":"this field must be after 2020-06-10",
+                    "value":"2020-06-10"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "specificType":"date",
+            "name": "date2",
+            "validators": [
+                {
+                    "type": "required",
+                    "errorMessage": "this field is required!"
+                },
+                {
+                    "type":"before",
+                    "errorMessage":"this field must be before today",
+                    "value":"2020-06-22"
+                },
+                {
+                    "type":"after",
+                    "errorMessage":"this field must be after 2020-06-10",
+                    "value":"2020-06-10"
                 }
             ]
         },

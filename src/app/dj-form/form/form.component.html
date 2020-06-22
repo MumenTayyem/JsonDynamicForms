@@ -1,6 +1,11 @@
 <div *ngIf='formJsonFields'>
-    <dj-form-control-host *ngFor='let field of formJsonFields' [customFormGroup]='group' [isSubmitted]='isSubmitted' [controlInfo]='field'>
+  <div *ngFor='let field of formJsonFields'>
+    <dj-form-control-host  [customFormGroup]='group' [isSubmitted]='isSubmitted' [controlInfo]='field'>
     </dj-form-control-host>
+    <br><hr><br>
+  </div>
+    
+    
   </div>
 <div>
   <button (click)='printControls()'>Print!</button>

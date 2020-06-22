@@ -53,7 +53,7 @@ export class FormComponent implements OnInit {
     // console.log(this.group.controls['favouriteAnimals']);
     console.log(this.group.errors);
     this.isSubmitted.next(true);
-    console.log(this.group.getRawValue());
+    // console.log(this.group.getRawValue());
   }
 
 }

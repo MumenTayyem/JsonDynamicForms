@@ -32,8 +32,6 @@ export class CheckboxComponent extends FormControl implements OnInit {
     this.isSubmitted.subscribe(res => {
       this.isSubmittedFlag = res;
     });
-
-    console.log("checkboxes");
     this.checkboxes.forEach(checkbox => {
       let formControl = new CustomCheckBox(false);
       formControl.customValue = checkbox.value;
