@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ComponentFactoryResolver, Input } from '@angular/core';
 import { HostDirective } from '../../directives/host.directive';
-import { TextComponent, before, after } from '../../types/text/text.component';
+import { TextComponent, before, after,beforeDateInForm } from '../../types/text/text.component';
 import { FormGroup, Validators, ValidationErrors, ValidatorFn, FormArray } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { SelectComponent } from '../../types/select/select.component';
@@ -84,6 +84,9 @@ export class FormControlHostComponent implements OnInit {
           break;
         case 'after':
           formValidators.push(after(this.controlInfo.name, validation.value));
+          break;
+        case 'beforeDateInForm':
+          formValidators.push(beforeDateInForm(this.controlInfo.name, validation.secondControlName));
           break;
       }
     });

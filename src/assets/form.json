@@ -31,14 +31,9 @@
                     "errorMessage": "this field is required!"
                 },
                 {
-                    "type":"before",
-                    "errorMessage":"this field must be before today",
-                    "value":"2020-06-22"
-                },
-                {
-                    "type":"after",
+                    "type":"beforeDateInForm",
                     "errorMessage":"this field must be after 2020-06-10",
-                    "value":"2020-06-10"
+                    "secondControlName":"date"
                 }
             ]
         },
