@@ -1,10 +1,11 @@
 <form [formGroup]='customFormGroup'>
   <div>
     <label>{{name}}</label>
-    <input [formControlName]='name' type="text">
+    <input [formControlName]='name' [type]="specificType">
   </div>
   <div *ngFor='let validation of validations'>
-    <div *ngIf='isSubmittedFlag && getControlValidationStatus(validation.type)=="invalid"'>
+    <div>{{validation.type}}--{{getControlValidationStatus(validation.type.toLowerCase())}}</div>
+    <div *ngIf='isSubmittedFlag && getControlValidationStatus(validation.type.toLowerCase())=="invalid"'>
       {{validation.errorMessage}}
     </div>
   </div>

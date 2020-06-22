@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {FormGroup} from '@angular/forms';
 import { TextComponent } from '../types/text/text.component';
@@ -21,7 +21,7 @@ export class FormComponent implements OnInit {
   group:FormGroup;
   isSubmitted:Subject<boolean>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cdr:ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -30,7 +30,9 @@ export class FormComponent implements OnInit {
     this.group = new FormGroup({});
     this.getJSON().subscribe(res => {
       this.formJsonFields = res['fields'];
-
+      this.cdr.detectChanges();
+      this.group.updateValueAndValidity();
+      //date validators not working
       
 
 
@@ -49,6 +51,7 @@ export class FormComponent implements OnInit {
 
   printControls(){
     // console.log(this.group.controls['favouriteAnimals']);
+    console.log(this.group.errors);
     this.isSubmitted.next(true);
     console.log(this.group.getRawValue());
   }

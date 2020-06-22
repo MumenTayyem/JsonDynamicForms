@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ComponentFactoryResolver, Input } from '@angular/core';
 import { HostDirective } from '../../directives/host.directive';
-import { TextComponent } from '../../types/text/text.component';
+import { TextComponent, before, after } from '../../types/text/text.component';
 import { FormGroup, Validators, ValidationErrors, ValidatorFn, FormArray } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { SelectComponent } from '../../types/select/select.component';
@@ -53,8 +53,10 @@ export class FormControlHostComponent implements OnInit {
     (<TextComponent>componentRef.instance).name = this.controlInfo.name;
     (<TextComponent>componentRef.instance).customFormGroup = this.customFormGroup;
     (<TextComponent>componentRef.instance).isSubmitted = this.isSubmitted;
+    (<TextComponent>componentRef.instance).specificType = this.controlInfo.specificType;
 
     let validations = [];
+    let formValidators = [];
 
     this.controlInfo.validators.forEach(validation => {
       validations.push({ 'type': validation.type, 'errorMessage': validation.errorMessage });
@@ -65,8 +67,28 @@ export class FormControlHostComponent implements OnInit {
         case 'pattern':
           validators.push(Validators.pattern(validation.regex));
           break;
+        case 'min':
+          validators.push(Validators.min(validation.value));
+          break;
+        case 'max':
+          validators.push(Validators.min(validation.value));
+          break;
+        case 'maxLength':
+          validators.push(Validators.maxLength(validation.value));
+          break;
+        case 'minLength':
+          validators.push(Validators.minLength(validation.value));
+          break;
+        case 'before':
+          formValidators.push(before(this.controlInfo.name, '2020-06-22'));
+          break;
+        case 'after':
+          formValidators.push(after(this.controlInfo.name, '2020-06-10'));
+          break;
       }
     });
+    this.customFormGroup.setValidators(formValidators);
+    
     (<TextComponent>componentRef.instance).validations = validations;
 
     //add it to the form

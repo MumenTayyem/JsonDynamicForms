@@ -2,6 +2,26 @@
     "fields": [
         {
             "type": "text",
+            "specificType":"date",
+            "name": "date",
+            "validators": [
+                {
+                    "type": "required",
+                    "errorMessage": "this field is required!"
+                },
+                {
+                    "type":"before",
+                    "errorMessage":"this field must be before today"
+                },
+                {
+                    "type":"after",
+                    "errorMessage":"this field must be after 2020-06-10"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "specificType":"text",
             "name": "name",
             "validators": [
                 {
@@ -17,11 +37,22 @@
         },
         {
             "type": "text",
+            "specificType":"number",
             "name": "name2",
             "validators": [
                 {
                     "type": "required",
                     "errorMessage": "this field is required!"
+                },
+                {
+                    "type": "min",
+                    "value":0,
+                    "errorMessage": "value must be greater than 0"
+                },
+                {
+                    "type": "maxLength",
+                    "value":3,
+                    "errorMessage": "maximum length is 3"
                 }
             ]
         },
