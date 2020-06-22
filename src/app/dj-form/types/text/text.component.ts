@@ -24,8 +24,8 @@ export class TextComponent extends FormControl implements OnInit {
   }
 
   getControlValidationStatus(type) {
-    if (type== 'before' || type == 'after' || 'beforedateinform'){
-      type=type+this.name;
+    if (type== 'before' || type == 'after' || type == 'beforedateinform'){     
+      type=type+this.name;     
     }
     return ((this.customFormGroup.controls[this.name].errors && this.customFormGroup.controls[this.name].errors[type])
       || (this.customFormGroup.errors && this.customFormGroup.errors[type])

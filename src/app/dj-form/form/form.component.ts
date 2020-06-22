@@ -51,7 +51,7 @@ export class FormComponent implements OnInit {
 
   printControls(){
     // console.log(this.group.controls['favouriteAnimals']);
-    console.log(this.group.errors);
+    console.log(this.group.controls);
     this.isSubmitted.next(true);
     // console.log(this.group.getRawValue());
   }
