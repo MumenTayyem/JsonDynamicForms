@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver, Input } from '@angular/core';
 import { HostDirective } from '../../directives/host.directive';
 import { TextComponent, before, after,beforeDateInForm } from '../../types/text/text.component';
-import { FormGroup, Validators, ValidationErrors, ValidatorFn, FormArray } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { SelectComponent } from '../../types/select/select.component';
-import { HttpClient } from '@angular/common/http';
 import { RadioComponent } from '../../types/radio/radio.component';
 import { CheckboxComponent, AtLeastOneChecked, CustomFormArray } from '../../types/checkbox/checkbox.component';
+import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'dj-form-control-host',
@@ -18,7 +18,7 @@ export class FormControlHostComponent implements OnInit {
   @Input() controlInfo: any;
   @Input() customFormGroup: FormGroup;
   @Input() isSubmitted: Subject<boolean>;
-  @ViewChild(HostDirective) host: HostDirective;
+  @ViewChild(HostDirective,{static:true}) host: HostDirective;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
     private http: HttpClient) { }
