@@ -54,17 +54,17 @@ export class FormComponent implements OnInit {
   }
 
   printControls(){
-    // console.log(this.group.controls);
+    console.log(this.group.controls);
     // // console.log(this.group.controls['favouriteAnimals']);
     // console.log(this.group.controls);
-    // if (this.group.valid){
+    if (this.group.valid){
 
-    // }else{
-    //   this.isSubmitted.next(true);
-    //   this.group.markAllAsTouched();
-    // }
+    }else{
+      this.isSubmitted.next(true);
+      this.group.markAllAsTouched();
+    }
     // // console.log(this.group.getRawValue());
-    console.log(this.group.controls['date'].errors);
+    // console.log(this.group.controls['date'].errors);
   }
 
 }

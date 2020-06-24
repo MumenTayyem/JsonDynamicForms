@@ -1,5 +1,5 @@
 <form [formGroup]='customFormGroup'>
-  <div *ngIf='options'>
+  <!-- <div *ngIf='options'>
     <label>{{name}}</label>
     <div *ngFor='let option of options'>
       <input type="radio" [value]='option.value' [formControlName]='name' [name]="name">{{option.name}}
@@ -9,5 +9,20 @@
     <div *ngIf='isSubmittedFlag && getControlValidationStatus(validation.type)=="invalid"'>
       {{validation.errorMessage}}
     </div>
-  </div>
+  </div> -->
+  
+  <label id="example-radio-group-label">{{name}}</label>
+<mat-radio-group
+class="example-radio-group"
+  [formControlName]='name'>
+  <mat-radio-button class="example-radio-button"  *ngFor='let option of options' [value]="option.value">
+    {{option.name}}
+  </mat-radio-button>
+</mat-radio-group>
+<mat-error *ngFor='let validation of validations'>
+  <span
+    *ngIf='(isSubmittedFlag || customFormGroup.controls[name].touched ) && getControlValidationStatus(validation.type.toLowerCase())=="invalid"'>
+    <i style="font-size: 75%;">{{validation.errorMessage}}</i>
+  </span>
+</mat-error>
 </form>

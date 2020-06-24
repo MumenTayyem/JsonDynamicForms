@@ -1,5 +1,5 @@
 <form [formGroup]='customFormGroup'>
-    <div>
+    <!-- <div>
       <label>{{name}}</label>
         <select [formControlName]='name'>
           <option value=''>--Please Select--</option>
@@ -10,5 +10,18 @@
       <div *ngIf='isSubmittedFlag && getControlValidationStatus(validation.type)=="invalid"'>
         {{validation.errorMessage}}
       </div>
-    </div>
+    </div> -->
+    <mat-form-field>
+      <mat-label>{{name}}</mat-label>
+      <mat-select [formControlName]='name'>
+        <mat-option value="">--Please Select--</mat-option>
+        <mat-option *ngFor='let option of options' [value]='option.value'>{{option.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngFor='let validation of validations'>
+        <span
+          *ngIf='(isSubmittedFlag || customFormGroup.controls[name].touched ) && getControlValidationStatus(validation.type.toLowerCase())=="invalid"'>
+          <i>{{validation.errorMessage}}</i>
+        </span>
+      </mat-error>
+    </mat-form-field>
   </form>
