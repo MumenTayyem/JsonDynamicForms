@@ -37,23 +37,23 @@ export class TextComponent extends FormControl implements OnInit {
       this.isSubmittedFlag = res;
     });
   }
-
+  
 }
 
 export function before(controlName: string, beforeValue: string): ValidatorFn {
   return (group: FormGroup): ValidationErrors | null => {
     let controlValue = group.controls[controlName].value;
-
     if (controlValue) {
       let controlDate = new Date(controlValue);
       let beforeDate = new Date(beforeValue);
       if (controlDate >= beforeDate) {
-        
+        group.controls[controlName].setErrors({['before'+controlName]: true});
         return { ['before'+controlName]: true };
       } else {
         return null;
       }
     } else {
+      group.controls[controlName].setErrors({['before'+controlName]: true});
       return { ['before'+controlName]: true };
     }
   }
@@ -66,11 +66,13 @@ export function after(controlName: string, afterValue: string): ValidatorFn {
       let controlDate = new Date(controlValue);
       let afterDate = new Date(afterValue);
       if (controlDate <= afterDate) {
+        group.controls[controlName].setErrors({['after'+controlName]: true});
         return { ['after'+controlName]: true };
       } else {
         return null;
       }
     } else {
+      group.controls[controlName].setErrors({['after'+controlName]: true});
       return { ['after'+controlName]: true };
     }
   }
@@ -84,11 +86,13 @@ export function beforeDateInForm(controlName: string, secondControlName: string)
       let controlDate = new Date(controlValue);
       let secondControlDate = new Date(secondControlValue);
       if (controlDate >= secondControlDate) {
+        group.controls[controlName].setErrors({['beforedateinform'+controlName]: true});
         return { ['beforedateinform'+controlName]: true };
       } else {
         return null;
       }
     } else {
+      group.controls[controlName].setErrors({['beforedateinform'+controlName]: true});
       return { ['beforedateinform'+controlName]: true };
     }
   }

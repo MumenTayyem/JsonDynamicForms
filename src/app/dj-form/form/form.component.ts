@@ -34,7 +34,11 @@ export class FormComponent implements OnInit {
       this.group.updateValueAndValidity();
       //date validators not working
       
-
+      this.group.controls['date'].valueChanges.subscribe(res=>{
+        // console.log(res);
+        // this.group.controls['date'].updateValueAndValidity();
+        // console.log(this.group.controls['date'].errors);
+      });
 
     },
       (err) => console.log('File does not exist!'))
@@ -50,10 +54,17 @@ export class FormComponent implements OnInit {
   }
 
   printControls(){
-    // console.log(this.group.controls['favouriteAnimals']);
-    console.log(this.group.controls);
-    this.isSubmitted.next(true);
-    // console.log(this.group.getRawValue());
+    // console.log(this.group.controls);
+    // // console.log(this.group.controls['favouriteAnimals']);
+    // console.log(this.group.controls);
+    // if (this.group.valid){
+
+    // }else{
+    //   this.isSubmitted.next(true);
+    //   this.group.markAllAsTouched();
+    // }
+    // // console.log(this.group.getRawValue());
+    console.log(this.group.controls['date'].errors);
   }
 
 }

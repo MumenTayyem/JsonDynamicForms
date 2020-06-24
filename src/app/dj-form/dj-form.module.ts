@@ -9,15 +9,27 @@ import { FormControlHostComponent } from './form/form-control-host/form-control-
 import { SelectComponent } from './types/select/select.component';
 import { RadioComponent } from './types/radio/radio.component';
 import { CheckboxComponent } from './types/checkbox/checkbox.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule, MAT_DATE_LOCALE,} from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
 
 @NgModule({
   declarations: [FormComponent, TextComponent, HostDirective, FormControlHostComponent, SelectComponent, RadioComponent, CheckboxComponent],
   imports: [
     CommonModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    // MatMomentDateModule
   ],
   exports:[FormComponent],
-  entryComponents:[TextComponent,SelectComponent,RadioComponent,CheckboxComponent]
+  entryComponents:[TextComponent,SelectComponent,RadioComponent,CheckboxComponent],
+  providers:[
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
+  ]
 })
 export class DJFormModule { }

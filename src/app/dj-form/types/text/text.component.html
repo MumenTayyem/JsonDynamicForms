@@ -1,12 +1,25 @@
 <form [formGroup]='customFormGroup'>
-  <div>
-    <label>{{name}}</label>
-    <input [formControlName]='name' [type]="specificType">
-  </div>
-  <div *ngFor='let validation of validations'>
-    <div>{{validation.type}}--{{getControlValidationStatus(validation.type.toLowerCase())}}</div>
-    <div *ngIf='isSubmittedFlag && getControlValidationStatus(validation.type.toLowerCase())=="invalid"'>
-      {{validation.errorMessage}}
-    </div>
-  </div>
+  <mat-form-field *ngIf='specificType != "date"'>
+    <mat-label>{{name}}</mat-label>
+      <input [type]="specificType" matInput [formControlName]="name">
+    <mat-error *ngFor='let validation of validations'>
+      <span
+        *ngIf='(isSubmittedFlag || customFormGroup.controls[name].touched ) && getControlValidationStatus(validation.type.toLowerCase())=="invalid"'>
+        <i>{{validation.errorMessage}}</i>
+      </span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngIf='specificType == "date"'>
+    <mat-label>{{name}}</mat-label>
+      <input matInput [matDatepicker]="dp3" readonly [formControlName]="name">
+      <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+      <mat-datepicker  #dp3 disabled="false"></mat-datepicker>
+    <mat-error *ngFor='let validation of validations'>
+      <span
+        *ngIf='(isSubmittedFlag || customFormGroup.controls[name].touched ) && getControlValidationStatus(validation.type.toLowerCase())=="invalid"'>
+        <i>{{validation.errorMessage}}</i>
+      </span>
+    </mat-error>
+  </mat-form-field>
 </form>
