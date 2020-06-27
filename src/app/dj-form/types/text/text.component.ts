@@ -14,6 +14,7 @@ export class TextComponent extends FormControl implements OnInit {
   @Input() isSubmitted: Subject<boolean>;
   @Input() name: string;
   @Input() validations: any[];
+  @Input() displayName:string;
 
   isSubmittedFlag = false;
 

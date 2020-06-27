@@ -1,3 +1,6 @@
 <div>
- <ng-template  djHost></ng-template>
+ <ng-template  djHost>
+ </ng-template>
+ <mat-spinner [diameter]='20' *ngIf='isLoading' style="margin: auto;"></mat-spinner>
+ <hr *ngIf='controlInfo.type != "text" && controlInfo.type != "select"'>
 </div>

@@ -2,22 +2,40 @@
     "fields": [
         {
             "type": "text",
-            "specificType":"date",
-            "name": "date",
+            "specificType":"text",
+            "name": "name",
+            "displayName":"Full name",
             "validators": [
                 {
                     "type": "required",
-                    "errorMessage": "this field is required!"
+                    "errorMessage": "This field is required."
+                },
+                {
+                    "type": "pattern",
+                    "errorMessage": "invalid text",
+                    "regex": "[0-9a-zA-Z]{2,}"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "specificType":"date",
+            "name": "date",
+            "displayName":"Date of birth",
+            "validators": [
+                {
+                    "type": "required",
+                    "errorMessage": "This field is required."
                 },
                 {
                     "type":"before",
-                    "errorMessage":"this field must be before today",
-                    "value":"2020-06-22"
+                    "errorMessage":"Date of birth must be before 2021",
+                    "value":"2021-01-01"
                 },
                 {
                     "type":"after",
-                    "errorMessage":"this field must be after 2020-06-10",
-                    "value":"2020-06-10"
+                    "errorMessage":"this field must be after 1900",
+                    "value":"1900-01-01"
                 }
             ]
         },
@@ -25,31 +43,16 @@
             "type": "text",
             "specificType":"date",
             "name": "date2",
+            "displayName":"Graduation year",
             "validators": [
                 {
                     "type": "required",
-                    "errorMessage": "this field is required!"
+                    "errorMessage": "This field is required."
                 },
                 {
-                    "type":"beforeDateInForm",
-                    "errorMessage":"this field must be after 2020-06-10",
+                    "type":"afterDateInForm",
+                    "errorMessage":"This field must be after date of birth",
                     "secondControlName":"date"
-                }
-            ]
-        },
-        {
-            "type": "text",
-            "specificType":"text",
-            "name": "name",
-            "validators": [
-                {
-                    "type": "required",
-                    "errorMessage": "this field is required!"
-                },
-                {
-                    "type": "pattern",
-                    "errorMessage": "invalid text",
-                    "regex": "[0-9]{2,}"
                 }
             ]
         },
@@ -57,10 +60,11 @@
             "type": "text",
             "specificType":"number",
             "name": "name2",
+            "displayName":"Salary",
             "validators": [
                 {
                     "type": "required",
-                    "errorMessage": "this field is required!"
+                    "errorMessage": "This field is required."
                 },
                 {
                     "type": "min",
@@ -69,28 +73,29 @@
                 },
                 {
                     "type": "maxLength",
-                    "value":3,
-                    "errorMessage": "maximum length is 3"
+                    "value":5,
+                    "errorMessage": "maximum length is 5"
                 }
             ]
         },
         {
             "type": "select",
             "name": "genderId",
+            "displayName":"Gender",
             "validators": [
                 {
                     "type": "required",
-                    "errorMessage": "this field is required!"
+                    "errorMessage": "This field is required."
                 }
             ],
             "options": [
                 {
                     "value": 1,
-                    "name": "male"
+                    "name": "Male"
                 },
                 {
                     "value": 2,
-                    "name": "female"
+                    "name": "Female"
                 }
             ],
             "mapper": {
@@ -103,32 +108,34 @@
         {
             "type": "radio",
             "name": "communicationWayId",
+            "displayName":"Prefered communication method",
             "validators": [
                 {
                     "type": "required",
-                    "errorMessage": "this field is required!"
+                    "errorMessage": "This field is required."
                 }
             ],
             "radios": [
                 {
                     "value": 1,
-                    "name": "mobile"
+                    "name": "Mobile"
                 },
                 {
                     "value": 2,
-                    "name": "email"
+                    "name": "Email"
                 }
             ],
             "mapper": {
                 "arguments": "options",
                 "body": "const arr=[]; options.forEach(option=>{arr.push({'value':option.id,'name':option.title})});return arr.slice(0,6);"
             },
-            "fetch": true,
+            "fetch": false,
             "api": "https://jsonplaceholder.typicode.com/posts"
         },
         {
             "type": "checkbox",
             "name": "favouriteAnimals",
+            "displayName":"Favourite Animals",
             "validators": [
                 {
                     "type": "atLeastOne",
@@ -138,11 +145,11 @@
             "checkboxes": [
                 {
                     "value": 10,
-                    "name": "dogs"
+                    "name": "Dogs"
                 },
                 {
                     "value": 20,
-                    "name": "cats"
+                    "name": "Cats"
                 }
             ],
             "mapper": {

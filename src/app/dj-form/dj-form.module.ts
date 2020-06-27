@@ -11,7 +11,7 @@ import { RadioComponent } from './types/radio/radio.component';
 import { CheckboxComponent } from './types/checkbox/checkbox.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule, MAT_DATE_LOCALE, MatSelectModule,MatRadioModule,MatCheckboxModule, MatButtonModule} from '@angular/material';
+import {MatNativeDateModule,MatProgressSpinnerModule, MAT_DATE_LOCALE, MatSelectModule,MatRadioModule,MatCheckboxModule, MatButtonModule} from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 
@@ -28,7 +28,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatSelectModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
     // MatMomentDateModule
   ],
   exports:[FormComponent],

@@ -19,6 +19,7 @@ export class FormControlHostComponent implements OnInit {
   @Input() customFormGroup: FormGroup;
   @Input() isSubmitted: Subject<boolean>;
   @ViewChild(HostDirective,{static:true}) host: HostDirective;
+  isLoading=false;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
     private http: HttpClient) { }
@@ -54,6 +55,7 @@ export class FormControlHostComponent implements OnInit {
     (<TextComponent>componentRef.instance).customFormGroup = this.customFormGroup;
     (<TextComponent>componentRef.instance).isSubmitted = this.isSubmitted;
     (<TextComponent>componentRef.instance).specificType = this.controlInfo.specificType;
+    (<TextComponent>componentRef.instance).displayName = this.controlInfo.displayName;
 
     let validations = [];
     let formValidators = [];
@@ -109,14 +111,16 @@ export class FormControlHostComponent implements OnInit {
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(SelectComponent);
 
     let viewContainerRef = this.host.viewContainerRef;
-
     if (this.controlInfo.fetch) {
+      this.isLoading=true;
       var f = new Function(this.controlInfo.mapper.arguments, this.controlInfo.mapper.body);
       this.http.get(this.controlInfo.api).subscribe(res => {
+      this.isLoading=false;
         //creating the component
         componentRef = viewContainerRef.createComponent(componentFactory);
         //init with needed data
         (<SelectComponent>componentRef.instance).name = this.controlInfo.name;
+        (<SelectComponent>componentRef.instance).displayName = this.controlInfo.displayName;
         (<SelectComponent>componentRef.instance).customFormGroup = this.customFormGroup;
         (<SelectComponent>componentRef.instance).isSubmitted = this.isSubmitted;
         (<SelectComponent>componentRef.instance).options = f(res);
@@ -141,6 +145,7 @@ export class FormControlHostComponent implements OnInit {
       componentRef = viewContainerRef.createComponent(componentFactory);
       //init with needed data
       (<SelectComponent>componentRef.instance).name = this.controlInfo.name;
+      (<SelectComponent>componentRef.instance).displayName = this.controlInfo.displayName;
       (<SelectComponent>componentRef.instance).customFormGroup = this.customFormGroup;
       (<SelectComponent>componentRef.instance).isSubmitted = this.isSubmitted;
       (<SelectComponent>componentRef.instance).options = this.controlInfo.options;
@@ -175,12 +180,15 @@ export class FormControlHostComponent implements OnInit {
 
 
     if (this.controlInfo.fetch) {
+      this.isLoading=true;
       var f = new Function(this.controlInfo.mapper.arguments, this.controlInfo.mapper.body);
       this.http.get(this.controlInfo.api).subscribe(res => {
+        this.isLoading=false;
         //creating the component
         componentRef = viewContainerRef.createComponent(componentFactory);
         //init with needed data
         (<RadioComponent>componentRef.instance).name = this.controlInfo.name;
+        (<RadioComponent>componentRef.instance).displayName = this.controlInfo.displayName;
         (<RadioComponent>componentRef.instance).customFormGroup = this.customFormGroup;
         (<RadioComponent>componentRef.instance).isSubmitted = this.isSubmitted;
         (<RadioComponent>componentRef.instance).options = f(res);
@@ -205,6 +213,7 @@ export class FormControlHostComponent implements OnInit {
       componentRef = viewContainerRef.createComponent(componentFactory);
       //init with needed data
       (<RadioComponent>componentRef.instance).name = this.controlInfo.name;
+      (<RadioComponent>componentRef.instance).displayName = this.controlInfo.displayName;
       (<RadioComponent>componentRef.instance).customFormGroup = this.customFormGroup;
       (<RadioComponent>componentRef.instance).isSubmitted = this.isSubmitted;
       (<RadioComponent>componentRef.instance).options = this.controlInfo.radios;
@@ -240,15 +249,16 @@ export class FormControlHostComponent implements OnInit {
 
 
     if (this.controlInfo.fetch) {
+      this.isLoading=true;
       var f = new Function(this.controlInfo.mapper.arguments, this.controlInfo.mapper.body);
 
       this.http.get(this.controlInfo.api).subscribe(res => {
-
-        console.log("mapper");
+        this.isLoading=false;
         //creating the component
         componentRef = viewContainerRef.createComponent(componentFactory);
         //init with needed data
         (<CheckboxComponent>componentRef.instance).name = this.controlInfo.name;
+        (<CheckboxComponent>componentRef.instance).displayName = this.controlInfo.displayName;
         (<CheckboxComponent>componentRef.instance).customFormGroup = this.customFormGroup;
         (<CheckboxComponent>componentRef.instance).isSubmitted = this.isSubmitted;
         (<CheckboxComponent>componentRef.instance).checkboxes = f(res);
@@ -277,6 +287,7 @@ export class FormControlHostComponent implements OnInit {
       componentRef = viewContainerRef.createComponent(componentFactory);
       //init with needed data
       (<CheckboxComponent>componentRef.instance).name = this.controlInfo.name;
+      (<CheckboxComponent>componentRef.instance).displayName = this.controlInfo.displayName;
       (<CheckboxComponent>componentRef.instance).customFormGroup = this.customFormGroup;
       (<CheckboxComponent>componentRef.instance).isSubmitted = this.isSubmitted;
       (<CheckboxComponent>componentRef.instance).checkboxes = this.controlInfo.checkboxes;

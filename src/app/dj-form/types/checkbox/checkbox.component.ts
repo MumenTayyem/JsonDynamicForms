@@ -15,6 +15,7 @@ export class CheckboxComponent extends FormControl implements OnInit {
   @Input() name: string;
   @Input() checkboxes: any[];
   @Input() validations: any[];
+  @Input() displayName:string;
 
   selectedValues = [];
 

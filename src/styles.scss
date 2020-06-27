@@ -7,5 +7,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 body{
-    padding: 100px;
+    padding: 200px;
 }
+
+mat-error{
+    i{
+        text-decoration: underline !important;
+    }
+}
+

@@ -14,6 +14,9 @@ export class RadioComponent extends FormControl implements OnInit {
   @Input() name: string;
   @Input() options: any[];
   @Input() validations: any[];
+  @Input() displayName:string;
+
+
   
   isSubmittedFlag = false;
   
