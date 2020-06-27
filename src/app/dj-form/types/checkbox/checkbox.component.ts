@@ -87,8 +87,9 @@ export function AtLeastOneChecked(): ValidatorFn {
     if (isValid) {
       return null;
     } else {
+      arr.setErrors({atLeastOne: true});
       setTimeout(() => {
-        arr.setErrors({atLeastOne: true});
+        
       }, 10);
       return { atLeastOne: true}
     }

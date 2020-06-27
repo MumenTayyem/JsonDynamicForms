@@ -1,7 +1,7 @@
 <form [formGroup]='customFormGroup'>
   <mat-form-field *ngIf='specificType != "date"'>
     <mat-label>{{name}}</mat-label>
-      <input [type]="specificType" matInput [formControlName]="name">
+      <input autocomplete="off" [type]="specificType" matInput [formControlName]="name">
     <mat-error *ngFor='let validation of validations'>
       <span
         *ngIf='(isSubmittedFlag || customFormGroup.controls[name].touched ) && getControlValidationStatus(validation.type.toLowerCase())=="invalid"'>
