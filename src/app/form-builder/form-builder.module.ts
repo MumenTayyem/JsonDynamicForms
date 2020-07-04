@@ -10,6 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DateControlToAddComponent } from './controls-to-add/date-control-to-add/date-control-to-add.component';
+import { SelectControlToAddComponent } from './controls-to-add/select-control-to-add/select-control-to-add.component';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 const routes:Routes = [
   {
@@ -30,7 +34,7 @@ const routes:Routes = [
 ];
 
 @NgModule({
-  declarations: [LayoutComponent, HomeComponent, ControlToAddComponent, DateControlToAddComponent],
+  declarations: [LayoutComponent, HomeComponent, ControlToAddComponent, DateControlToAddComponent, SelectControlToAddComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -39,7 +43,10 @@ const routes:Routes = [
     FormsModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule
   ],
   exports:[RouterModule]
 })

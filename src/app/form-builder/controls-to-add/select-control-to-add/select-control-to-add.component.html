@@ -1,0 +1,57 @@
+<form [formGroup]='form'>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input autocomplete="off" matInput formControlName='name' placeholder="Ex. username">
+    <mat-hint>This will be used as a name for the field</mat-hint>
+    <mat-error *ngIf="form.controls.displayName.errors">
+      Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Display Name</mat-label>
+    <input autocomplete="off" matInput formControlName='displayName' placeholder="Ex. Username">
+    <mat-hint>This will be used as a label for the field</mat-hint>
+    <mat-error *ngIf="form.controls.displayName.errors">
+      Display Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <div class="row">
+    <div class="col-lg-6">
+      <mat-label>Options
+        <button mat-icon-button type="button" (click)='addANewOption()'>
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-label>
+    </div>
+    <div class="col-lg-6">
+      <mat-list>
+
+        <mat-list-item *ngFor='let option of form.controls.options.controls;let i =index'  formArrayName="options">
+        <div style="margin: auto;">
+          <mat-form-field>
+            <mat-label>{{'Option#'+i}}</mat-label>
+            <input autocomplete="off" matInput [formControlName]="i">
+            <mat-error *ngIf="form.controls.options.controls[i].errors">
+              {{'Option#'+i}} is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <button mat-icon-button *ngIf='i > 1' (click)='removeOption(i)'>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Validators</mat-label>
+    <mat-select multiple (selectionChange)='validatorsChanged($event)'>
+      <mat-option *ngFor="let validation of valdiators" [value]="validation">{{validation | titlecase}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button (click)='submit()'>Print</button>
+</form>
