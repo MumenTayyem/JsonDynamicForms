@@ -60,6 +60,7 @@ export class SelectControlToAddComponent implements OnInit {
 
   handleDynamicFields() {
     this.dyanmicFields = [];
+    console.log(this.selectedValidators);
     this.selectedValidators.forEach(f => {
 
       switch (f) {
@@ -125,7 +126,7 @@ export class SelectControlToAddComponent implements OnInit {
 
     for (let index = 0; index < keys.length; index++) {
       const element: string = keys[index];
-      if (element == 'name' || element == 'displayName')
+      if (element == 'name' || element == 'displayName' || element == 'options')
         continue;
 
       if (this.dyanmicFields.filter(df => df.name == element).length == 0) {

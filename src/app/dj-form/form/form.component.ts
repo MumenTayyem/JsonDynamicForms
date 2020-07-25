@@ -61,7 +61,7 @@ export class FormComponent implements OnInit {
 
     }else{
       this.isSubmitted.next(true);
-      this.group.markAllAsTouched();
+      // this.group.markAllAsTouched();
     }
     // // console.log(this.group.getRawValue());
     // console.log(this.group.controls['date'].errors);
