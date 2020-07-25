@@ -1,0 +1,60 @@
+<form [formGroup]='form'>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input autocomplete="off" matInput formControlName='name' placeholder="Ex. username">
+        <mat-hint>This will be used as a name for the field</mat-hint>
+        <mat-error *ngIf="form.controls.displayName.errors">
+            Name is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-label>Display Name</mat-label>
+        <input autocomplete="off" matInput formControlName='displayName' placeholder="Ex. Username">
+        <mat-hint>This will be used as a label for the field</mat-hint>
+        <mat-error *ngIf="form.controls.displayName.errors">
+            Display Name is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Validators</mat-label>
+        <mat-select multiple (selectionChange)='validatorsChanged($event)'>
+            <mat-option *ngFor="let validation of valdiators" [value]="validation">{{validation | titlecase}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <ng-container *ngFor='let df of dyanmicFields'>
+        <mat-form-field *ngIf='df.type=="text"'>
+            <mat-label>Choose a value</mat-label>
+            <input  autocomplete="off" matInput [type]="df.specificType?df.specificType:'text'" [placeholder]="df.name" [formControlName]='df.name'>
+             <mat-error *ngIf="form.controls[df.name].errors">
+                {{df.name | titlecase}} is <strong>required</strong>
+            </mat-error>
+
+        </mat-form-field>
+        <mat-form-field appearance="fill" *ngIf='df.type=="date"'>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" [formControlName]='df.name'>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+
+        </mat-form-field>
+
+        <mat-form-field *ngIf='df.type=="select"'>
+            <mat-label>{{df.name | titlecase}}</mat-label>
+            <mat-select [formControlName]='df.name'>
+                <mat-option *ngFor="let other of df.others" [value]="other">
+                    {{other | titlecase}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls[df.name].errors">
+                {{df.name | titlecase}} is <strong>required</strong>
+            </mat-error>
+
+        </mat-form-field>
+
+        <br>
+    </ng-container>
+    <button (click)='submit()'>Print</button>
+</form>

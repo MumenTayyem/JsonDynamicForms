@@ -14,6 +14,9 @@ import { SelectControlToAddComponent } from './controls-to-add/select-control-to
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { TextControlToAddComponent } from './controls-to-add/text-control-to-add/text-control-to-add.component';
+import { NumberControlToAddComponent } from './controls-to-add/number-control-to-add/number-control-to-add.component';
+import { RadioControlToAddComponent } from './controls-to-add/radio-control-to-add/radio-control-to-add.component';
 
 const routes:Routes = [
   {
@@ -34,7 +37,7 @@ const routes:Routes = [
 ];
 
 @NgModule({
-  declarations: [LayoutComponent, HomeComponent, ControlToAddComponent, DateControlToAddComponent, SelectControlToAddComponent],
+  declarations: [LayoutComponent, HomeComponent, ControlToAddComponent, DateControlToAddComponent, SelectControlToAddComponent, TextControlToAddComponent, NumberControlToAddComponent, RadioControlToAddComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
