@@ -19,6 +19,7 @@ import { NumberControlToAddComponent } from './controls-to-add/number-control-to
 import { RadioControlToAddComponent } from './controls-to-add/radio-control-to-add/radio-control-to-add.component';
 import { DynamicFieldsComponent } from './dynamic-fields/dynamic-fields.component';
 import { OptionsComponent } from './options/options.component';
+import { CheckBoxControlToAddComponent } from './controls-to-add/check-box-control-to-add/check-box-control-to-add.component';
 
 const routes:Routes = [
   {
@@ -39,7 +40,7 @@ const routes:Routes = [
 ];
 
 @NgModule({
-  declarations: [LayoutComponent, HomeComponent, ControlToAddComponent, DateControlToAddComponent, SelectControlToAddComponent, TextControlToAddComponent, NumberControlToAddComponent, RadioControlToAddComponent, DynamicFieldsComponent, OptionsComponent],
+  declarations: [LayoutComponent, HomeComponent, ControlToAddComponent, DateControlToAddComponent, SelectControlToAddComponent, TextControlToAddComponent, NumberControlToAddComponent, RadioControlToAddComponent, DynamicFieldsComponent, OptionsComponent, CheckBoxControlToAddComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
