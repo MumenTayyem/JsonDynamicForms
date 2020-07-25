@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-number-control-to-add',
@@ -14,42 +15,15 @@ export class NumberControlToAddComponent implements OnInit {
   });
 
 
-  allValidators: any = {
-    text: [
-      'required',
-      'regex',
-      'maxLength',
-      'minLength'
-    ],
-    number: [
-      'max',
-      'min'
-    ],
-    date: [
-      'before',
-      'after',
-      'afterDateInForm',
-      'beforeDateInForm'
-    ],
-    radio: [
-      'required'
-    ],
-    select: [
-      'required'
-    ],
-    checkbox: [
-      'atLeastOne'
-    ]
-  };
 
   valdiators: any[] = [];
   selectedValidators = [];
   dyanmicFields = [];
 
-  constructor() { }
+  constructor(private sharedService:SharedService) { }
 
   ngOnInit(): void {
-    this.valdiators = this.allValidators['number'];
+    this.valdiators = this.sharedService.allValidators['number'];
   }
 
   validatorsChanged(event) {
