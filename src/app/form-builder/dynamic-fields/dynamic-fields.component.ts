@@ -11,6 +11,7 @@ export class DynamicFieldsComponent implements OnInit {
 
   @Input() dynamicFields:DynamicField[]=[];
   @Input() form:FormGroup;
+  panelOpenState = false;
 
   constructor() { }
 

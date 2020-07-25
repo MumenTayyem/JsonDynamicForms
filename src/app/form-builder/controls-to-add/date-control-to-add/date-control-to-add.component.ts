@@ -19,6 +19,8 @@ export class DateControlToAddComponent {
     availableValidators: this.sharedService.getAvailableValidators('date')
   };
 
+  panelOpenState = false;
+
   constructor(private sharedService: SharedService) { }
 
   validatorsChanged(event) {

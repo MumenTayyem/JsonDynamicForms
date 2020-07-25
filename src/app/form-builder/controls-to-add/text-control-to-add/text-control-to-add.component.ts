@@ -18,6 +18,8 @@ export class TextControlToAddComponent {
     dyanmicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('text')
   };
+  
+  panelOpenState = false;
 
   constructor(private sharedService: SharedService) { }
 

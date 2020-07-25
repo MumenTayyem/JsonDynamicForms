@@ -20,6 +20,7 @@ import { RadioControlToAddComponent } from './controls-to-add/radio-control-to-a
 import { DynamicFieldsComponent } from './dynamic-fields/dynamic-fields.component';
 import { OptionsComponent } from './options/options.component';
 import { CheckBoxControlToAddComponent } from './controls-to-add/check-box-control-to-add/check-box-control-to-add.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 const routes:Routes = [
   {
@@ -52,7 +53,8 @@ const routes:Routes = [
     MatDatepickerModule,
     MatListModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatExpansionModule
   ],
   exports:[RouterModule]
 })
