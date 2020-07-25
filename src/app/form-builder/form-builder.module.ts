@@ -17,6 +17,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { TextControlToAddComponent } from './controls-to-add/text-control-to-add/text-control-to-add.component';
 import { NumberControlToAddComponent } from './controls-to-add/number-control-to-add/number-control-to-add.component';
 import { RadioControlToAddComponent } from './controls-to-add/radio-control-to-add/radio-control-to-add.component';
+import { DynamicFieldsComponent } from './dynamic-fields/dynamic-fields.component';
 
 const routes:Routes = [
   {
@@ -37,7 +38,7 @@ const routes:Routes = [
 ];
 
 @NgModule({
-  declarations: [LayoutComponent, HomeComponent, ControlToAddComponent, DateControlToAddComponent, SelectControlToAddComponent, TextControlToAddComponent, NumberControlToAddComponent, RadioControlToAddComponent],
+  declarations: [LayoutComponent, HomeComponent, ControlToAddComponent, DateControlToAddComponent, SelectControlToAddComponent, TextControlToAddComponent, NumberControlToAddComponent, RadioControlToAddComponent, DynamicFieldsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
