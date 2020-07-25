@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ControlData } from '../models/controlData.model';
-import { Validators, FormControl } from '@angular/forms';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,10 @@ export class SharedService {
       'atLeastOne'
     ]
   };
+
+  getAvailableValidators(key:string){
+    return this.allValidators[key];
+  }
 
   validatorsChanged(event:any,controlData:ControlData) {
     controlData.selectedValidators = event.value;
@@ -136,5 +140,24 @@ export class SharedService {
       }
     }
     controlData.form.updateValueAndValidity();
+  }
+
+  getOtherDateFields(currentFieldName: string,form:FormGroup) {
+    let fieldNames = [];
+
+    let keys = Object.keys(form.controls);
+    // let keys = ['date of birth', 'visa expiry', 'hi'];
+    for (let index = 0; index < keys.length; index++) {
+      const element = keys[index];
+      if (element == form.controls.name.value)
+        continue;
+      else
+        fieldNames.push(element);
+      // fieldNames.push(element);
+
+
+    }
+    console.log(fieldNames);
+    return fieldNames;
   }
 }

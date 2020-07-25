@@ -1,8 +1,9 @@
 import { FormGroup } from '@angular/forms';
 
 export interface ControlData{
-    selectedValidators:string[];
+    selectedValidators?:string[];
     others?:string[];
+    availableValidators:string[];
     dyanmicFields:DynamicField[];
     form:FormGroup;
 }
