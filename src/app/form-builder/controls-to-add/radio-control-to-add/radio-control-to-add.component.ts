@@ -14,7 +14,7 @@ export class RadioControlToAddComponent {
     form: new FormGroup({
       name: new FormControl('', [Validators.required]),
       displayName: new FormControl('', [Validators.required]),
-      options:new FormArray([new FormControl('',Validators.required),new FormControl('',Validators.required)])
+      options: new FormArray([new FormControl('', Validators.required), new FormControl('', Validators.required)])
     }),
     dyanmicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('radio')
@@ -28,19 +28,7 @@ export class RadioControlToAddComponent {
     console.log(this.controlData);
   }
 
-  removeOption(index){
-    (this.controlData.form.controls.options as FormArray).removeAt(index);
-  }
-
-  addANewOption(){
-    (this.controlData.form.controls.options as FormArray).push(new FormControl('',[Validators.required]));
-  }
-
-
-
   submit() {
     console.log(this.controlData.form.controls);
   }
-
-
 }

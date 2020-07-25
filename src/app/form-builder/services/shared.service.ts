@@ -132,7 +132,7 @@ export class SharedService {
 
     for (let index = 0; index < keys.length; index++) {
       const element: string = keys[index];
-      if (element == 'name' || element == 'displayName')
+      if (element == 'name' || element == 'displayName' || element == 'options')
         continue;
 
       if (controlData.dyanmicFields.filter(df => df.name == element).length == 0) {

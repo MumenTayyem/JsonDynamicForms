@@ -19,29 +19,8 @@
   <br>
   <mat-label>Options
   </mat-label>
-  <mat-list>
-    <mat-list-item *ngFor='let option of controlData.form.controls.options.controls;let i =index'
-      formArrayName="options">
-      <div style="margin: auto;">
-        <mat-form-field>
-          <mat-label>{{'Option#'+(i+1)}}</mat-label>
-          <input autocomplete="off" matInput [formControlName]="i">
-          <mat-error *ngIf="controlData.form.controls.options.controls[i].errors">
-            {{'Option#'+(i+1)}} is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <button mat-icon-button *ngIf='i > 1' (click)='removeOption(i)'>
-          <mat-icon>delete</mat-icon>
-        </button>
-        <button mat-icon-button *ngIf='i == controlData.form.controls.options.controls.length-1' type="button"
-          (click)='addANewOption()'>
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-    </mat-list-item>
-  </mat-list>
-  <br>
-  <mat-form-field appearance="fill">
+  <app-options [form]='controlData.form'></app-options>
+  <mat-form-field>
     <mat-label>Validators</mat-label>
     <mat-select multiple (selectionChange)='validatorsChanged($event)'>
       <mat-option *ngFor="let validation of controlData.availableValidators" [value]="validation">

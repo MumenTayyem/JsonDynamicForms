@@ -18,6 +18,7 @@ import { TextControlToAddComponent } from './controls-to-add/text-control-to-add
 import { NumberControlToAddComponent } from './controls-to-add/number-control-to-add/number-control-to-add.component';
 import { RadioControlToAddComponent } from './controls-to-add/radio-control-to-add/radio-control-to-add.component';
 import { DynamicFieldsComponent } from './dynamic-fields/dynamic-fields.component';
+import { OptionsComponent } from './options/options.component';
 
 const routes:Routes = [
   {
@@ -38,7 +39,7 @@ const routes:Routes = [
 ];
 
 @NgModule({
-  declarations: [LayoutComponent, HomeComponent, ControlToAddComponent, DateControlToAddComponent, SelectControlToAddComponent, TextControlToAddComponent, NumberControlToAddComponent, RadioControlToAddComponent, DynamicFieldsComponent],
+  declarations: [LayoutComponent, HomeComponent, ControlToAddComponent, DateControlToAddComponent, SelectControlToAddComponent, TextControlToAddComponent, NumberControlToAddComponent, RadioControlToAddComponent, DynamicFieldsComponent, OptionsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
