@@ -16,8 +16,10 @@ export class NumberControlToAddComponent {
       displayName: new FormControl('', [Validators.required])
     }),
     dyanmicFields: [],
-    availableValidators: this.sharedService.getAvailableValidators('number')
+    availableValidators: this.sharedService.getAvailableValidators('number'),
+    panelOpenState: false
   };
+
 
   constructor(private sharedService: SharedService) { }
 
@@ -25,11 +27,6 @@ export class NumberControlToAddComponent {
     this.sharedService.validatorsChanged(event, this.controlData);
     console.clear();
     console.log(this.controlData);
-  }
-
-
-  submit() {
-    console.log(this.controlData.form.controls);
   }
 
 }

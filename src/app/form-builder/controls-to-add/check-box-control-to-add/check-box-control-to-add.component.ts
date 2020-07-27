@@ -10,16 +10,16 @@ import { ControlData } from '../../models/controlData.model';
 })
 export class CheckBoxControlToAddComponent  {
 
-  
   controlData: ControlData = {
     form: new FormGroup({
       name: new FormControl('', [Validators.required]),
-      displayName: new FormControl('', [Validators.required]),
-      options: new FormArray([new FormControl('', Validators.required), new FormControl('', Validators.required)])
+      displayName: new FormControl('', [Validators.required])
     }),
     dyanmicFields: [],
-    availableValidators: this.sharedService.getAvailableValidators('checkbox')
+    availableValidators: this.sharedService.getAvailableValidators('checkbox'),
+    panelOpenState: false
   };
+
 
   constructor(private sharedService: SharedService) { }
 
@@ -28,9 +28,4 @@ export class CheckBoxControlToAddComponent  {
     console.clear();
     console.log(this.controlData);
   }
-
-  submit() {
-    console.log(this.controlData.form.controls);
-  }
-
 }

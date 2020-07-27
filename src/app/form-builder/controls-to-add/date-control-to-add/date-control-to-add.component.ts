@@ -16,10 +16,10 @@ export class DateControlToAddComponent {
       displayName: new FormControl('', [Validators.required])
     }),
     dyanmicFields: [],
-    availableValidators: this.sharedService.getAvailableValidators('date')
+    availableValidators: this.sharedService.getAvailableValidators('date'),
+    panelOpenState: false
   };
 
-  panelOpenState = false;
 
   constructor(private sharedService: SharedService) { }
 
@@ -27,11 +27,6 @@ export class DateControlToAddComponent {
     this.sharedService.validatorsChanged(event, this.controlData);
     console.clear();
     console.log(this.controlData);
-  }
-
-
-  submit() {
-    console.log(this.controlData.form.controls);
   }
 
 }

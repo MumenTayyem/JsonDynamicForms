@@ -13,22 +13,20 @@ export class SelectControlToAddComponent {
   controlData: ControlData = {
     form: new FormGroup({
       name: new FormControl('', [Validators.required]),
-      displayName: new FormControl('', [Validators.required]),
-      options: new FormArray([new FormControl('', Validators.required), new FormControl('', Validators.required)])
+      displayName: new FormControl('', [Validators.required])
     }),
     dyanmicFields: [],
-    availableValidators: this.sharedService.getAvailableValidators('select')
+    availableValidators: this.sharedService.getAvailableValidators('select'),
+    panelOpenState: false
   };
+
 
   constructor(private sharedService: SharedService) { }
 
   validatorsChanged(event) {
     this.sharedService.validatorsChanged(event, this.controlData);
+    console.clear();
     console.log(this.controlData);
-  }
-
-  submit() {
-    console.log(this.controlData.form.controls);
   }
 
 }

@@ -1,31 +1,36 @@
-<form [formGroup]='controlData.form'>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input autocomplete="off" matInput formControlName='name' placeholder="Ex. username">
-    <mat-hint>This will be used as a name for the field</mat-hint>
-    <mat-error *ngIf="controlData.form.controls.displayName.errors">
-      Name is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Display Name</mat-label>
-    <input autocomplete="off" matInput formControlName='displayName' placeholder="Ex. Username">
-    <mat-hint>This will be used as a label for the field</mat-hint>
-    <mat-error *ngIf="controlData.form.controls.displayName.errors">
-      Display Name is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-  <br>
-  <mat-label>Options
-  </mat-label>
-  <app-options [form]='controlData.form'></app-options>
-  <mat-form-field>
-    <mat-label>Validators</mat-label>
-    <mat-select multiple (selectionChange)='validatorsChanged($event)'>
-      <mat-option *ngFor="let validation of controlData.availableValidators" [value]="validation">
-        {{validation | titlecase}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button (click)='submit()'>Print</button>
-</form>
+<div class="row">
+  <div class="col-lg-12">
+      <mat-accordion>
+          <mat-expansion-panel (opened)="controlData.panelOpenState = true"
+              (closed)="controlData.panelOpenState = false">
+              <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      <strong>Select
+                          <ng-container *ngIf='controlData.title$ | async as title'>
+                              <i class="controlLabel">
+                                  {{title}}
+                              </i>
+                          </ng-container>
+                      </strong>
+                  </mat-panel-title>
+              </mat-expansion-panel-header>
+              <app-control-basic-info [controlData]='controlData'></app-control-basic-info>
+              <div class="row">
+                  <div class="col-lg-12 validators">
+                      <mat-form-field>
+                          <mat-label>Validators</mat-label>
+                          <mat-select multiple (selectionChange)='validatorsChanged($event)'>
+                              <mat-option *ngFor="let validation of controlData.availableValidators"
+                                  [value]="validation">
+                                  {{validation | titlecase}}
+                              </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                  </div>
+              </div>
+              <app-dynamic-fields *ngIf='controlData.form' [form]='controlData.form'
+                  [dynamicFields]='controlData.dyanmicFields'></app-dynamic-fields>
+          </mat-expansion-panel>
+      </mat-accordion>
+  </div>
+</div>
