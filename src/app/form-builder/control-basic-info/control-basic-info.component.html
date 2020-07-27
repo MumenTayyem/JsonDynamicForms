@@ -1,0 +1,24 @@
+<form [formGroup]='controlData.form'>
+    <div class="row">
+        <div class="col-lg-6">
+            <mat-form-field>
+                <mat-label>Display Name</mat-label>
+                <input autocomplete="off" matInput formControlName='displayName' placeholder="Ex. Username">
+                <mat-hint>This will be used as a label for the field</mat-hint>
+                <mat-error *ngIf="controlData.form.controls.displayName.errors">
+                    Display Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input autocomplete="off" matInput formControlName='name' placeholder="Ex. username">
+                <mat-hint>This will be used as a name for the field</mat-hint>
+                <mat-error *ngIf="controlData.form.controls.name.errors">
+                    Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</form>
