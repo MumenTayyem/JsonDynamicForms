@@ -7,18 +7,10 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './dynamic-fields.component.html',
   styleUrls: ['./dynamic-fields.component.scss']
 })
-export class DynamicFieldsComponent implements OnInit {
+export class DynamicFieldsComponent {
 
   @Input() dynamicFields:DynamicField[]=[];
   @Input() form:FormGroup;
   panelOpenState = false;
-
-  constructor() { }
-
-  ngOnInit(): void {
-    setTimeout(() => {
-      console.log(this.dynamicFields);
-    }, 5000);
-  }
 
 }

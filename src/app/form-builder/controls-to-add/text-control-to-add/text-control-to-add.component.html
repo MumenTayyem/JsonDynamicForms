@@ -2,21 +2,17 @@
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                <strong>Text | {{controlData.form.controls.name.value}}</strong>
+                <strong>Text
+                    <ng-container *ngIf='title$ | async as title'>
+                        <i>
+                            {{title}}
+                        </i>
+                    </ng-container>
+                </strong>
             </mat-panel-title>
         </mat-expansion-panel-header>
         <form [formGroup]='controlData.form'>
             <div class="row">
-                <div class="col-lg-6">
-                    <mat-form-field>
-                        <mat-label>Name</mat-label>
-                        <input autocomplete="off" matInput formControlName='name' placeholder="Ex. username">
-                        <mat-hint>This will be used as a name for the field</mat-hint>
-                        <mat-error *ngIf="controlData.form.controls.name.errors">
-                            Name is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
                 <div class="col-lg-6">
                     <mat-form-field>
                         <mat-label>Display Name</mat-label>
@@ -27,8 +23,18 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
+                <div class="col-lg-6">
+                    <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input autocomplete="off" matInput formControlName='name' placeholder="Ex. username">
+                        <mat-hint>This will be used as a name for the field</mat-hint>
+                        <mat-error *ngIf="controlData.form.controls.name.errors">
+                            Name is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
                 <div class="col-lg-12 validators">
-                    <mat-form-field >
+                    <mat-form-field>
                         <mat-label>Validators</mat-label>
                         <mat-select multiple (selectionChange)='validatorsChanged($event)'>
                             <mat-option *ngFor="let validation of controlData.availableValidators" [value]="validation">
