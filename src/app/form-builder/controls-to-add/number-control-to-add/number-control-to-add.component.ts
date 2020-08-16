@@ -12,6 +12,8 @@ import { Subject } from 'rxjs';
 export class NumberControlToAddComponent {
 
   controlData: ControlData = {
+    type:'text',
+    specificType:'number',
     form: new FormGroup({
       name: new FormControl('', [Validators.required]),
       displayName: new FormControl('', [Validators.required])
@@ -19,7 +21,8 @@ export class NumberControlToAddComponent {
     dynamicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('number'),
     panelOpenState: false,
-    dynamicFieldsChanged: new Subject<Object>()
+    dynamicFieldsChanged: new Subject<Object>(),
+    isRequired:false
   };
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem,copyArrayItem} from '@angular/cdk/drag-drop';
 import { ControlToAddComponent } from '../control-to-add/control-to-add.component';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { ControlToAddComponent } from '../control-to-add/control-to-add.componen
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedService:SharedService) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
     'number',
     'date',
     'checkbox',
-    'radio'
+    'radio',
+    'select'
   ];
 
   selectedControls = [];
@@ -40,7 +42,7 @@ export class HomeComponent implements OnInit {
 
   print(){
     this.addedControls.forEach(control=>{
-      console.log(control.control);
+      console.log(this.sharedService.getControlValue(control.control.controlData));
     });
   }
 

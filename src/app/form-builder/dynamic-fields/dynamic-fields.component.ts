@@ -29,6 +29,13 @@ export class DynamicFieldsComponent implements OnInit, OnDestroy {
           });
         }
       }
+
+      if (this.controlData.isRequired){
+        console.log('hi');
+        this.controlData.form.addControl('errorMessage',new FormControl('',[Validators.required]));
+      }else{
+        this.controlData.form.removeControl('errorMessage');
+      }
     }));
   }
 }

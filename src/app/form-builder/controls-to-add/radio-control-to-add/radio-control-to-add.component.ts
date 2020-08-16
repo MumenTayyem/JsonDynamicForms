@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 export class RadioControlToAddComponent {
 
   controlData: ControlData = {
+    type:'radio',
     form: new FormGroup({
       name: new FormControl('', [Validators.required]),
       displayName: new FormControl('', [Validators.required])
@@ -19,7 +20,8 @@ export class RadioControlToAddComponent {
     dynamicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('radio'),
     panelOpenState: false,
-    dynamicFieldsChanged: new Subject<Object>()
+    dynamicFieldsChanged: new Subject<Object>(),
+    isRequired:false
   };
 
 

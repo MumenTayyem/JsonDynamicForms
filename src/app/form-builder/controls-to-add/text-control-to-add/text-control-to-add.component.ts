@@ -12,6 +12,8 @@ import { Subject } from 'rxjs';
 export class TextControlToAddComponent {
 
   controlData: ControlData = {
+    type:'text',
+    specificType:'text',
     form: new FormGroup({
       name: new FormControl('', [Validators.required]),
       displayName: new FormControl('', [Validators.required])
@@ -19,7 +21,8 @@ export class TextControlToAddComponent {
     dynamicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('text'),
     panelOpenState: false,
-    dynamicFieldsChanged: new Subject<Object>()
+    dynamicFieldsChanged: new Subject<Object>(),
+    isRequired:false
   };
 
 

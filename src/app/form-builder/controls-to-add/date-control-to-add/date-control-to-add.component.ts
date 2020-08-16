@@ -12,6 +12,8 @@ import { Subject } from 'rxjs';
 export class DateControlToAddComponent {
   
   controlData: ControlData = {
+    type:'text',
+    specificType:'date',
     form: new FormGroup({
       name: new FormControl('', [Validators.required]),
       displayName: new FormControl('', [Validators.required])
@@ -19,7 +21,8 @@ export class DateControlToAddComponent {
     dynamicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('date'),
     panelOpenState: false,
-    dynamicFieldsChanged: new Subject<Object>()
+    dynamicFieldsChanged: new Subject<Object>(),
+    isRequired:false
   };
 
 

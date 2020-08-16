@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 export class CheckBoxControlToAddComponent  {
 
   controlData: ControlData = {
+    type:'checkbox',
     form: new FormGroup({
       name: new FormControl('', [Validators.required]),
       displayName: new FormControl('', [Validators.required])
@@ -19,7 +20,8 @@ export class CheckBoxControlToAddComponent  {
     dynamicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('checkbox'),
     panelOpenState: false,
-    dynamicFieldsChanged: new Subject<Object>()
+    dynamicFieldsChanged: new Subject<Object>(),
+    isRequired:false
   };
 
 

@@ -15,10 +15,12 @@ export class SharedService {
       'minLength'
     ],
     number: [
+      'required',
       'max',
       'min'
     ],
     date: [
+      'required',
       'before',
       'after',
       'afterDateInForm',
@@ -55,6 +57,10 @@ export class SharedService {
 
       switch (f) {
         case 'required':
+          controlData.isRequired = true;
+          break;
+        case 'atLeastOne':
+          controlData.isRequired = true;
           break;
         case 'max':
           // controlData.form.addControl('max', new FormControl('', [Validators.required]));
@@ -160,5 +166,26 @@ export class SharedService {
 
     }
     return fieldNames;
+  }
+
+  getControlValue(controlData: ControlData) {
+    let value = Object.assign({}, controlData.form.getRawValue());
+    delete value.errorMessage;
+
+    value.type = controlData.type;
+    if (controlData.specificType){
+      value.specificType = controlData.specificType;
+    }
+
+    value.validators = [];
+    controlData.dynamicFields.forEach(df => value.validators.push(df.form.getRawValue()));
+
+    if (controlData.isRequired){
+      value.validators.push({
+        type: controlData.type === "checkbox" ? "atLeastOne":"required",
+        errorMessage: controlData.form.controls.errorMessage.value
+      });
+    }
+    return value;
   }
 }
