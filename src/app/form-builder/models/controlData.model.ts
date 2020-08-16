@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 export interface ControlData{
     selectedValidators?:string[];
@@ -9,10 +9,12 @@ export interface ControlData{
     form:FormGroup;
     title$?:Observable<string>;
     panelOpenState:boolean;
+    dynamicFieldsChanged?:Subject<Object>
 }
 
 export interface DynamicField{
     name:string;
     type:string;
     specificType?:string;
+    form?:FormGroup;
 }

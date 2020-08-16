@@ -1,11 +1,11 @@
-<form [formGroup]='form'>
-    <div class="row">
-        <div class="col-lg-6" *ngFor='let df of dynamicFields'>
+<div class="row">
+    <div class="col-lg-12" *ngFor='let df of dynamicFields;let i = index'>
+        <form [formGroup]='df.form' *ngIf='df.form && df.form.controls[df.name]'>
             <mat-form-field *ngIf='df.type=="text"'>
                 <mat-label>{{df.name | titlecase}}</mat-label>
                 <input autocomplete="off" matInput [type]="df.specificType?df.specificType:'text'"
                     [placeholder]="df.name" [formControlName]='df.name'>
-                <mat-error *ngIf="form.controls[df.name].errors">
+                <mat-error *ngIf="df.form.controls[df.name].errors">
                     {{df.name | titlecase}} is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
@@ -13,10 +13,10 @@
                 <mat-label>{{df.name | titlecase}}</mat-label>
                 <input matInput readonly [matDatepicker]="picker" [formControlName]='df.name'>
                 <mat-datepicker-toggle
-                    [ngClass]="{'animate__animated animate__fadeIn animate__animated animate__infinite':!form.controls[df.name].value}"
+                    [ngClass]="{'animate__animated animate__fadeIn animate__animated animate__infinite':!df.form.controls[df.name].value}"
                     matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                <mat-error *ngIf="form.controls[df.name].errors">
+                <mat-error *ngIf="df.form.controls[df.name].errors">
                     {{df.name | titlecase}} is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
@@ -27,10 +27,20 @@
                         {{other | titlecase}}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="form.controls[df.name].errors">
+                <mat-error *ngIf="df.form.controls[df.name].errors">
                     {{df.name | titlecase}} is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
-        </div>
+            <mat-form-field>
+                <mat-label>Error Message</mat-label>
+                <input autocomplete="off" matInput
+                    placeholder="Error Message" formControlName='errorMessage'>
+                <mat-error *ngIf="df.form.controls['errorMessage'].errors">
+                    Error Message is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </form>
+        <hr>
     </div>
-</form>
+
+</div>

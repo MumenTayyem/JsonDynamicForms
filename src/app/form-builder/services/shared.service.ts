@@ -46,7 +46,6 @@ export class SharedService {
 
   handleDynamicFields(controlData:ControlData) {
     controlData.dyanmicFields = [];
-    console.log(controlData.selectedValidators);
     controlData.selectedValidators.forEach(f => {
 
       switch (f) {
@@ -157,7 +156,6 @@ export class SharedService {
 
 
     }
-    console.log(fieldNames);
     return fieldNames;
   }
 }

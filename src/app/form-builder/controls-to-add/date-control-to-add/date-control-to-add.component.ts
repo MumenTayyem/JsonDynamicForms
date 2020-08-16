@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from '../../services/shared.service';
 import { ControlData } from '../../models/controlData.model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-date-control-to-add',
@@ -17,7 +18,8 @@ export class DateControlToAddComponent {
     }),
     dyanmicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('date'),
-    panelOpenState: false
+    panelOpenState: false,
+    dynamicFieldsChanged: new Subject<Object>()
   };
 
 
@@ -25,8 +27,7 @@ export class DateControlToAddComponent {
 
   validatorsChanged(event) {
     this.sharedService.validatorsChanged(event, this.controlData);
-    console.clear();
-    console.log(this.controlData);
+    this.controlData.dynamicFieldsChanged.next();
   }
 
 }
