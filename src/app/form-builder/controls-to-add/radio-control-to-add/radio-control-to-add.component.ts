@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { SharedService } from '../../services/shared.service';
 import { ControlData } from '../../models/controlData.model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-radio-control-to-add',
@@ -17,7 +18,8 @@ export class RadioControlToAddComponent {
     }),
     dynamicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('radio'),
-    panelOpenState: false
+    panelOpenState: false,
+    dynamicFieldsChanged: new Subject<Object>()
   };
 
 
@@ -25,7 +27,6 @@ export class RadioControlToAddComponent {
 
   validatorsChanged(event) {
     this.sharedService.validatorsChanged(event, this.controlData);
-    console.clear();
-    console.log(this.controlData);
+    this.controlData.dynamicFieldsChanged.next();
   }
 }

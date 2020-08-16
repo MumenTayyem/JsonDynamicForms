@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ControlData } from '../../models/controlData.model';
 import { SharedService } from '../../services/shared.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-select-control-to-add',
@@ -17,7 +18,8 @@ export class SelectControlToAddComponent {
     }),
     dynamicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('select'),
-    panelOpenState: false
+    panelOpenState: false,
+    dynamicFieldsChanged: new Subject<Object>()
   };
 
 
@@ -25,8 +27,7 @@ export class SelectControlToAddComponent {
 
   validatorsChanged(event) {
     this.sharedService.validatorsChanged(event, this.controlData);
-    console.clear();
-    console.log(this.controlData);
+    this.controlData.dynamicFieldsChanged.next();
   }
 
 }

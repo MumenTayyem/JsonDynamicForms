@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { SharedService } from '../../services/shared.service';
 import { ControlData } from '../../models/controlData.model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-text-control-to-add',
@@ -17,7 +18,8 @@ export class TextControlToAddComponent {
     }),
     dynamicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('text'),
-    panelOpenState: false
+    panelOpenState: false,
+    dynamicFieldsChanged: new Subject<Object>()
   };
 
 
@@ -25,7 +27,6 @@ export class TextControlToAddComponent {
 
   validatorsChanged(event) {
     this.sharedService.validatorsChanged(event, this.controlData);
-    console.clear();
-    console.log(this.controlData);
+    this.controlData.dynamicFieldsChanged.next();
   }
 }
