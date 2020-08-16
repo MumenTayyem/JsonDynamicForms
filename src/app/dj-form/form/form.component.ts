@@ -14,6 +14,7 @@ import { Subject } from 'rxjs';
 export class FormComponent implements OnInit {
 
   @Input() FromSchemaPath;
+  @Input() json;
  
 
   public formJsonFields;
@@ -28,26 +29,39 @@ export class FormComponent implements OnInit {
     this.isSubmitted=new Subject<boolean>();
 
     this.group = new FormGroup({});
-    this.getJSON().subscribe(res => {
-      this.formJsonFields = res['fields'];
+    // this.getJSON().subscribe(res => {
+    //   this.formJsonFields = res['fields'];
+    //   this.cdr.detectChanges();
+    //   this.group.updateValueAndValidity();
+    //   //date validators not working
+      
+    //   this.group.controls['date'].valueChanges.subscribe(res=>{
+    //     // console.log(res);
+    //     // this.group.controls['date'].updateValueAndValidity();
+    //     // console.log(this.group.controls['date'].errors);
+    //   });
+
+    // },
+    //   (err) => console.log('File does not exist!'))
+    let res = this.json;
+    this.formJsonFields = res;
       this.cdr.detectChanges();
       this.group.updateValueAndValidity();
       //date validators not working
       
-      this.group.controls['date'].valueChanges.subscribe(res=>{
-        // console.log(res);
-        // this.group.controls['date'].updateValueAndValidity();
-        // console.log(this.group.controls['date'].errors);
-      });
+      // this.group.controls['date'].valueChanges.subscribe(res=>{
+      //   // console.log(res);
+      //   // this.group.controls['date'].updateValueAndValidity();
+      //   // console.log(this.group.controls['date'].errors);
+      // });
 
-    },
-      (err) => console.log('File does not exist!'))
   }
 
   public getJSON() {
     return this.http.get(this.FromSchemaPath);;
 
   }
+
 
   buildComponent(){
     

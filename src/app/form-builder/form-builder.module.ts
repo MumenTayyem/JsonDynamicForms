@@ -22,6 +22,7 @@ import { OptionsComponent } from './options/options.component';
 import { CheckBoxControlToAddComponent } from './controls-to-add/check-box-control-to-add/check-box-control-to-add.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ControlBasicInfoComponent } from './control-basic-info/control-basic-info.component';
+import { DJFormModule } from '../dj-form/dj-form.module';
 
 const routes: Routes = [
   {
@@ -66,7 +67,8 @@ const routes: Routes = [
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatExpansionModule
+    MatExpansionModule,
+    DJFormModule
   ],
   exports: [RouterModule]
 })

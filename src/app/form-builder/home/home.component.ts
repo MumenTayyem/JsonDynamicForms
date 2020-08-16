@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   ];
 
   selectedControls = [];
-
+  json=[];
   @ViewChildren('addedControl') addedControls !: QueryList<ControlToAddComponent>;
 
 
@@ -42,7 +42,11 @@ export class HomeComponent implements OnInit {
 
   print(){
     this.addedControls.forEach(control=>{
-      console.log(this.sharedService.getControlValue(control.control.controlData));
+      control.control.controlData.form.markAllAsTouched();
+      control.control.controlData.dynamicFields.forEach(df=>{
+        df.form.markAllAsTouched();
+      });
+      this.json.push(this.sharedService.getControlValue(control.control.controlData));
     });
   }
 
