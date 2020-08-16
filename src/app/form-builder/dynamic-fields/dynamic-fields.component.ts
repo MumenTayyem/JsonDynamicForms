@@ -8,23 +8,22 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./dynamic-fields.component.scss']
 })
 export class DynamicFieldsComponent implements OnInit {
-  
-  @Input() dynamicFields:DynamicField[]=[];
-  @Input() form:FormGroup;
-  @Input() controlData:ControlData;
-  panelOpenState = false;
+
+  @Input() controlData: ControlData;
 
   ngOnInit(): void {
-    if (this.controlData && this.controlData.dynamicFieldsChanged){
-      this.controlData.dynamicFieldsChanged.subscribe(()=>{
-        for (let index = 0; index < this.controlData.dyanmicFields.length; index++) {
-          const df = this.controlData.dyanmicFields[index];
-          df.form = new FormGroup({
-            [df.name] : new FormControl('',[Validators.required]),
-            errorMessage : new FormControl('',[Validators.required])
-          });
+    console.log('hi');
+    if (this.controlData && this.controlData.dynamicFieldsChanged) {
+      this.controlData.dynamicFieldsChanged.subscribe(() => {
+        for (let index = 0; index < this.controlData.dynamicFields.length; index++) {
+          const df = this.controlData.dynamicFields[index];
+          if (!df.form) {
+            df.form = new FormGroup({
+              [df.name]: new FormControl('', [Validators.required]),
+              errorMessage: new FormControl('', [Validators.required])
+            });
+          }
         }
-        console.log(this.controlData.dyanmicFields);
       });
     }
   }

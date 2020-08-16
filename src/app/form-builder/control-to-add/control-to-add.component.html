@@ -26,7 +26,7 @@
     </mat-select>
   </mat-form-field>
   <br>
-  <ng-container *ngFor='let df of dyanmicFields'>
+  <ng-container *ngFor='let df of dynamicFields'>
     <mat-form-field  >
         <mat-label>{{df.name | titlecase}} *</mat-label>
         <input autocomplete="off" matInput [type]="df.type" [formControlName]='df.name'>

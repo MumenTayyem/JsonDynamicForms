@@ -15,7 +15,7 @@ export class TextControlToAddComponent {
       name: new FormControl('', [Validators.required]),
       displayName: new FormControl('', [Validators.required])
     }),
-    dyanmicFields: [],
+    dynamicFields: [],
     availableValidators: this.sharedService.getAvailableValidators('text'),
     panelOpenState: false
   };

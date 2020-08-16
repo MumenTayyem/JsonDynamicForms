@@ -1,5 +1,6 @@
 <div class="row">
-    <div class="col-lg-12" *ngFor='let df of dynamicFields;let i = index'>
+    <div class="col-lg-12" *ngFor='let df of controlData.dynamicFields;let i = index'>
+        <hr>
         <form [formGroup]='df.form' *ngIf='df.form && df.form.controls[df.name]'>
             <mat-form-field *ngIf='df.type=="text"'>
                 <mat-label>{{df.name | titlecase}}</mat-label>
@@ -33,14 +34,11 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Error Message</mat-label>
-                <input autocomplete="off" matInput
-                    placeholder="Error Message" formControlName='errorMessage'>
+                <input autocomplete="off" matInput placeholder="Error Message" formControlName='errorMessage'>
                 <mat-error *ngIf="df.form.controls['errorMessage'].errors">
                     Error Message is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
         </form>
-        <hr>
     </div>
-
 </div>

@@ -41,7 +41,7 @@ export class ControlToAddComponent implements OnInit {
 
   valdiators: any[] = [];
   selectedValidators = [];
-  dyanmicFields = [];
+  dynamicFields = [];
 
   constructor() { }
 
@@ -56,7 +56,7 @@ export class ControlToAddComponent implements OnInit {
   }
 
   handleDynamicFields() {
-    this.dyanmicFields = [];
+    this.dynamicFields = [];
     this.selectedValidators.forEach(f => {
 
       switch (f) {
@@ -64,21 +64,21 @@ export class ControlToAddComponent implements OnInit {
           break;
         case 'regex':
           this.form.addControl('regex', new FormControl('', [Validators.required]));
-          this.dyanmicFields.push({
+          this.dynamicFields.push({
             name: 'regex',
             type: 'text'
           });
           break;
         case 'maxLength':
           this.form.addControl('maxLength', new FormControl('', [Validators.required]));
-          this.dyanmicFields.push({
+          this.dynamicFields.push({
             name: 'maxLength',
             type: 'number'
           });
           break;
         case 'minLength':
           this.form.addControl('minLength', new FormControl('', [Validators.required]));
-          this.dyanmicFields.push({
+          this.dynamicFields.push({
             name: 'minLength',
             type: 'number'
           });
@@ -106,7 +106,7 @@ export class ControlToAddComponent implements OnInit {
       if (element == 'name' || element == 'displayName')
         continue;
 
-      if (this.dyanmicFields.filter(df => df.name == element).length == 0) {
+      if (this.dynamicFields.filter(df => df.name == element).length == 0) {
         console.log('removing : ' + element);
         this.form.removeControl(element);
       }

@@ -28,8 +28,7 @@
                       </mat-form-field>
                   </div>
               </div>
-              <app-dynamic-fields *ngIf='controlData.form' [form]='controlData.form'
-                  [dynamicFields]='controlData.dyanmicFields'></app-dynamic-fields>
+              <app-dynamic-fields *ngIf='controlData.dynamicFields' [controlData]='controlData'></app-dynamic-fields>
           </mat-expansion-panel>
       </mat-accordion>
   </div>

@@ -5,7 +5,7 @@ export interface ControlData{
     selectedValidators?:string[];
     others?:string[];
     availableValidators:string[];
-    dyanmicFields:DynamicField[];
+    dynamicFields:DynamicField[];
     form:FormGroup;
     title$?:Observable<string>;
     panelOpenState:boolean;
