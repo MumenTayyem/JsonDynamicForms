@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
       });
       this.json.push(this.sharedService.getControlValue(control.control.controlData));
     });
+    console.log(this.json);
   }
 
 }

@@ -10,7 +10,7 @@ export class SharedService {
   allValidators: any = {
     text: [
       'required',
-      'regex',
+      'pattern',
       'maxLength',
       'minLength'
     ],
@@ -47,7 +47,8 @@ export class SharedService {
   }
 
   handleDynamicFields(controlData: ControlData) {
-    // this.cleanForm(controlData);
+
+    this.cleanForm(controlData);
     for (let index = 0; index < controlData.selectedValidators.length; index++) {
       const f = controlData.selectedValidators[index];
 
@@ -133,18 +134,20 @@ export class SharedService {
           break;
       }
     }
+    // this.cleanForm(controlData);
   }
 
   cleanForm(controlData: ControlData) {
-    let keys = Object.keys(controlData.form.controls);
 
-    for (let index = 0; index < keys.length; index++) {
-      const element: string = keys[index];
+    for (let index = 0; index < controlData.selectedValidators.length; index++) {
+      const element: string = controlData.selectedValidators[index];
       if (element == 'name' || element == 'displayName' || element == 'options')
         continue;
 
-      if (controlData.dynamicFields.filter(df => df.name == element).length == 0) {
-        controlData.form.removeControl(element);
+      if (controlData.dynamicFields.filter(df => df.type == element).length == 0) {
+        console.log('removing '+element);
+        let indexToDelete = controlData.dynamicFields.findIndex(df => df.type == element);
+        controlData.dynamicFields.splice(indexToDelete,1);
       }
     }
     controlData.form.updateValueAndValidity();
