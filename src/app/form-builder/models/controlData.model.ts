@@ -13,6 +13,12 @@ export interface ControlData{
     panelOpenState:boolean;
     dynamicFieldsChanged?:Subject<Object>
     isRequired:boolean;
+    optionsForm?: FormGroup;
+}
+
+export interface Option{
+    value:number;
+    name:string;
 }
 
 export interface DynamicField{

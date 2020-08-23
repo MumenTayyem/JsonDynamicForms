@@ -21,7 +21,13 @@ export class CheckBoxControlToAddComponent  {
     availableValidators: this.sharedService.getAvailableValidators('checkbox'),
     panelOpenState: false,
     dynamicFieldsChanged: new Subject<Object>(),
-    isRequired:false
+    isRequired:false,
+    optionsForm : new FormGroup({
+      options : new FormArray([
+        new FormControl('',[Validators.required]),
+        new FormControl('',[Validators.required])
+      ])
+    })
   };
 
 

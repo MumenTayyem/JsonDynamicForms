@@ -1,21 +1,26 @@
 <form [formGroup]='form'>
     <mat-list>
+        <div mat-subheader>Options
+            <button mat-icon-button type="button" (click)='addANewOption()'>
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
         <mat-list-item *ngFor='let option of form.controls.options.controls;let i =index' formArrayName="options">
-            <div style="margin: auto;">
-                <mat-form-field>
-                    <mat-label>{{'Option#'+(i+1)}}</mat-label>
-                    <input autocomplete="off" matInput [formControlName]="i">
-                    <mat-error *ngIf="form.controls.options.controls[i].errors">
-                        {{'Option#'+(i+1)}} is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
-                <button mat-icon-button *ngIf='i > 1' (click)='removeOption(i)'>
-                    <mat-icon>delete</mat-icon>
-                </button>
-                <button mat-icon-button *ngIf='i == form.controls.options.controls.length-1' type="button"
-                    (click)='addANewOption()'>
-                    <mat-icon>add</mat-icon>
-                </button>
+            <div class="row">
+                <div class="col-lg-2 padding-top">
+                    <button mat-icon-button *ngIf='i > 1' (click)='removeOption(i)'>
+                        <mat-icon color='danger'>delete</mat-icon>
+                    </button>
+                </div>
+                <div class="col-lg-10">
+                    <mat-form-field>
+                        <mat-label>{{'Option#'+(i+1)}}</mat-label>
+                        <input autocomplete="off" matInput [formControlName]="i">
+                        <mat-error *ngIf="form.controls.options.controls[i].errors">
+                            {{'Option#'+(i+1)}} is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
             </div>
         </mat-list-item>
     </mat-list>
