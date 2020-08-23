@@ -13,7 +13,7 @@
                 {
                     "type": "pattern",
                     "errorMessage": "invalid text",
-                    "regex": "[0-9a-zA-Z]{2,}"
+                    "value": "[0-9a-zA-Z]{2,}"
                 }
             ]
         },

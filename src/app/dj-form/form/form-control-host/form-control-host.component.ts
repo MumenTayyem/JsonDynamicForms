@@ -67,7 +67,7 @@ export class FormControlHostComponent implements OnInit {
           validators.push(Validators.required);
           break;
         case 'pattern':
-          validators.push(Validators.pattern(validation.regex));
+          validators.push(Validators.pattern(validation.value));
           break;
         case 'min':
           validators.push(Validators.min(validation.value));
