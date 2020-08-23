@@ -216,7 +216,7 @@ export class FormControlHostComponent implements OnInit {
       (<RadioComponent>componentRef.instance).displayName = this.controlInfo.displayName;
       (<RadioComponent>componentRef.instance).customFormGroup = this.customFormGroup;
       (<RadioComponent>componentRef.instance).isSubmitted = this.isSubmitted;
-      (<RadioComponent>componentRef.instance).options = this.controlInfo.radios;
+      (<RadioComponent>componentRef.instance).options = this.controlInfo.options;
 
       let validations = [];
 
@@ -290,7 +290,7 @@ export class FormControlHostComponent implements OnInit {
       (<CheckboxComponent>componentRef.instance).displayName = this.controlInfo.displayName;
       (<CheckboxComponent>componentRef.instance).customFormGroup = this.customFormGroup;
       (<CheckboxComponent>componentRef.instance).isSubmitted = this.isSubmitted;
-      (<CheckboxComponent>componentRef.instance).checkboxes = this.controlInfo.checkboxes;
+      (<CheckboxComponent>componentRef.instance).checkboxes = this.controlInfo.options;
 
       let validations = [];
 

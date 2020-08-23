@@ -115,7 +115,7 @@
                     "errorMessage": "This field is required."
                 }
             ],
-            "radios": [
+            "options": [
                 {
                     "value": 1,
                     "name": "Mobile"
@@ -142,7 +142,7 @@
                     "errorMessage": "at least one checkbox is required"
                 }
             ],
-            "checkboxes": [
+            "options": [
                 {
                     "value": 10,
                     "name": "Dogs"
