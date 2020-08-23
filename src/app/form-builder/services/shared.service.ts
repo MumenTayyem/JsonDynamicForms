@@ -48,7 +48,7 @@ export class SharedService {
 
   handleDynamicFields(controlData: ControlData) {
 
-    // this.cleanForm(controlData);
+    this.cleanForm(controlData);
     for (let index = 0; index < controlData.selectedValidators.length; index++) {
       const f = controlData.selectedValidators[index];
 

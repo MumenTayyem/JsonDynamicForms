@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   print(){
+    this.json=[];
     this.addedControls.forEach(control=>{
       control.control.controlData.form.markAllAsTouched();
       control.control.controlData.dynamicFields.forEach(df=>{
