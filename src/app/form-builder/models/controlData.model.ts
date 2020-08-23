@@ -13,7 +13,7 @@ export interface ControlData{
     panelOpenState:boolean;
     dynamicFieldsChanged?:Subject<Object>
     isRequired:boolean;
-    optionsForm?: FormGroup;
+    options?:FormGroup[];
 }
 
 export interface Option{

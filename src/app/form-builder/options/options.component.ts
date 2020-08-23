@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { ControlData } from '../models/controlData.model';
 
 @Component({
   selector: 'app-options',
@@ -8,19 +9,35 @@ import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 })
 export class OptionsComponent implements OnInit {
 
-  @Input() form:FormGroup;
+  @Input() controlData:ControlData;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.controlData.options = 
+    [
+      new FormGroup({
+        name : new FormControl('',[Validators.required]),
+        value : new FormControl('',[Validators.required])
+      }),
+      new FormGroup({
+        name : new FormControl('',[Validators.required]),
+        value : new FormControl('',[Validators.required])
+      })
+    ];
   }
 
   removeOption(index){
-    (this.form.controls.options as FormArray).removeAt(index);
+    (this.controlData.options).splice(index,1);
   }
 
   addANewOption(){
-    (this.form.controls.options as FormArray).push(new FormControl('',[Validators.required]));
+    this.controlData.options.push(
+      new FormGroup({
+        name : new FormControl('',[Validators.required]),
+        value : new FormControl('',[Validators.required])
+      })
+    );
   }
 
 

@@ -190,6 +190,13 @@ export class SharedService {
         errorMessage: controlData.form.controls.errorMessage.value
       });
     }
+
+    if (controlData.options){
+      value.options = [];
+      controlData.options.forEach(option=>{
+        value.options.push(option.getRawValue());
+      });
+    }
     return value;
   }
 }
