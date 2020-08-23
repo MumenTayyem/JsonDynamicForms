@@ -14,6 +14,8 @@ export interface ControlData{
     dynamicFieldsChanged?:Subject<Object>
     isRequired:boolean;
     options?:FormGroup[];
+    fetchForm?:FormGroup;
+    fetchFromAPI?:boolean;
 }
 
 export interface Option{

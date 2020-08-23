@@ -25,6 +25,14 @@ export class OptionsComponent implements OnInit {
         value : new FormControl('',[Validators.required])
       })
     ];
+
+    this.controlData.fetchFromAPI = false;
+
+    this.controlData.fetchForm = new FormGroup({
+      api : new FormControl('',[Validators.required]),
+      arguments : new FormControl('',[Validators.required]),
+      body : new FormControl('',[Validators.required])
+    });
   }
 
   removeOption(index){

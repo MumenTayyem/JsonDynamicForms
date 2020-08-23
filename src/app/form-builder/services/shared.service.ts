@@ -145,9 +145,9 @@ export class SharedService {
         continue;
 
       if (controlData.dynamicFields.filter(df => df.type == element).length == 0) {
-        console.log('removing '+element);
+        console.log('removing ' + element);
         let indexToDelete = controlData.dynamicFields.findIndex(df => df.type == element);
-        controlData.dynamicFields.splice(indexToDelete,1);
+        controlData.dynamicFields.splice(indexToDelete, 1);
       }
     }
     controlData.form.updateValueAndValidity();
@@ -177,25 +177,38 @@ export class SharedService {
     delete value.errorMessage;
 
     value.type = controlData.type;
-    if (controlData.specificType){
+    if (controlData.specificType) {
       value.specificType = controlData.specificType;
     }
 
     value.validators = [];
     controlData.dynamicFields.forEach(df => value.validators.push(df.form.getRawValue()));
 
-    if (controlData.isRequired){
+    if (controlData.isRequired) {
       value.validators.push({
-        type: controlData.type === "checkbox" ? "atLeastOne":"required",
+        type: controlData.type === "checkbox" ? "atLeastOne" : "required",
         errorMessage: controlData.form.controls.errorMessage.value
       });
     }
 
-    if (controlData.options){
-      value.options = [];
-      controlData.options.forEach(option=>{
-        value.options.push(option.getRawValue());
-      });
+    if (controlData.type == "checkbox" || 
+    controlData.type == "select" ||
+    controlData.type == "radio") {
+
+      if (controlData.fetchForm){
+        value.fetch = controlData.fetchFromAPI;
+        value.api = controlData.fetchForm.controls.api.value;
+        value.mapper = {};
+        value.mapper.arguments = controlData.fetchForm.controls.arguments.value;
+        value.mapper.body = controlData.fetchForm.controls.body.value;
+      }else{
+        value.options = [];
+        controlData.options.forEach(option => {
+          value.options.push(option.getRawValue());
+        });
+      }
+
+      
     }
     return value;
   }
