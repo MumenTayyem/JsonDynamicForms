@@ -48,7 +48,7 @@ export class SharedService {
 
   handleDynamicFields(controlData: ControlData) {
 
-    this.cleanForm(controlData);
+    // this.cleanForm(controlData);
     for (let index = 0; index < controlData.selectedValidators.length; index++) {
       const f = controlData.selectedValidators[index];
 
@@ -79,10 +79,10 @@ export class SharedService {
             specificType: 'number'
           });
           break;
-        case 'regex':
+        case 'pattern':
           // controlData.form.addControl('regex', new FormControl('', [Validators.required]));
           controlData.dynamicFields.push({
-            name: 'regex',
+            name: 'pattern',
             type: 'text'
           });
           break;
@@ -138,7 +138,7 @@ export class SharedService {
   }
 
   cleanForm(controlData: ControlData) {
-
+    console.log(controlData.dynamicFields);
     for (let index = 0; index < controlData.selectedValidators.length; index++) {
       const element: string = controlData.selectedValidators[index];
       if (element == 'name' || element == 'displayName' || element == 'options')
@@ -151,6 +151,7 @@ export class SharedService {
       }
     }
     controlData.form.updateValueAndValidity();
+    console.log(controlData.dynamicFields);
   }
 
   getOtherDateFields(currentFieldName: string, form: FormGroup) {

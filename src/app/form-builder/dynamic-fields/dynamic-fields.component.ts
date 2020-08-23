@@ -24,7 +24,8 @@ export class DynamicFieldsComponent implements OnInit, OnDestroy {
         const df = this.controlData.dynamicFields[index];
         if (!df.form) {
           df.form = new FormGroup({
-            [df.name]: new FormControl('', [Validators.required]),
+            type: new FormControl(df.name,[Validators.required]),
+            value: new FormControl('', [Validators.required]),
             errorMessage: new FormControl('', [Validators.required])
           });
         }
