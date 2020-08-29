@@ -9,13 +9,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./dynamic-fields.component.scss']
 })
 export class DynamicFieldsComponent implements OnInit, OnDestroy {
-  
+
 
   @Input() controlData: ControlData;
   subs: Subscription[] = [];
 
   ngOnDestroy(): void {
-    this.subs.forEach(sub=>sub.unsubscribe());
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 
   ngOnInit(): void {
@@ -24,17 +24,16 @@ export class DynamicFieldsComponent implements OnInit, OnDestroy {
         const df = this.controlData.dynamicFields[index];
         if (!df.form) {
           df.form = new FormGroup({
-            type: new FormControl(df.name,[Validators.required]),
+            type: new FormControl(df.name, [Validators.required]),
             value: new FormControl('', [Validators.required]),
             errorMessage: new FormControl('', [Validators.required])
           });
         }
       }
 
-      if (this.controlData.isRequired){
-        console.log('hi');
-        this.controlData.form.addControl('errorMessage',new FormControl('',[Validators.required]));
-      }else{
+      if (this.controlData.isRequired) {
+        this.controlData.form.addControl('errorMessage', new FormControl('', [Validators.required]));
+      } else {
         this.controlData.form.removeControl('errorMessage');
       }
     }));

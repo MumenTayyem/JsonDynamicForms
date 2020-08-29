@@ -34,9 +34,8 @@ export class HomeComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 
     } else {
-      console.log(event.previousIndex);
-      console.log(this.selectedControls);
       copyArrayItem(event.previousContainer.data,event.container.data,event.previousIndex,event.currentIndex);
+      this.sharedService.addedControls = this.addedControls;
     }
   }
 

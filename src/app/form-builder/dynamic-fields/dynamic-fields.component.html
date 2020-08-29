@@ -38,11 +38,12 @@
             </mat-form-field>
             <mat-form-field *ngIf='df.type=="select"'>
                 <mat-label>{{df.name | titlecase}}</mat-label>
-                <mat-select [formControlName]='value'>
-                    <mat-option *ngFor="let other of df.others" [value]="other">
+                <mat-select formControlName='value'>
+                    <mat-option *ngFor="let other of controlData.others" [value]="other">
                         {{other | titlecase}}
                     </mat-option>
                 </mat-select>
+                <mat-hint>Make sure you give the control you want to compare a name</mat-hint>
                 <mat-error *ngIf="df.form.controls['value'].errors">
                     {{df.name | titlecase}} is <strong>required</strong>
                 </mat-error>

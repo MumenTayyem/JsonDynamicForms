@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, QueryList } from '@angular/core';
 import { ControlData, DynamicField } from '../models/controlData.model';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { ControlToAddComponent } from '../control-to-add/control-to-add.component';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,8 @@ export class SharedService {
     ]
   };
 
+  addedControls!: QueryList<ControlToAddComponent>;
+
   getAvailableValidators(key: string) {
     return this.allValidators[key];
   }
@@ -48,7 +51,11 @@ export class SharedService {
 
   handleDynamicFields(controlData: ControlData) {
 
-    this.cleanForm(controlData);
+    if (!controlData.selectedValidators)
+    return;
+    controlData.isRequired = controlData.selectedValidators.indexOf('required')>-1
+      || controlData.selectedValidators.indexOf('atLeastOne')>-1?true:false;
+
     for (let index = 0; index < controlData.selectedValidators.length; index++) {
       const f = controlData.selectedValidators[index];
 
@@ -57,12 +64,6 @@ export class SharedService {
       }
 
       switch (f) {
-        case 'required':
-          controlData.isRequired = true;
-          break;
-        case 'atLeastOne':
-          controlData.isRequired = true;
-          break;
         case 'max':
           // controlData.form.addControl('max', new FormControl('', [Validators.required]));
           controlData.dynamicFields.push({
@@ -121,55 +122,47 @@ export class SharedService {
           controlData.dynamicFields.push({
             name: 'afterDateInForm',
             type: 'select',
-            // others: controlData.getOtherDateFields(controlData.form.controls.name.value)
           });
+          controlData.others = this.getOtherDateFields(controlData);
           break;
         case 'beforeDateInForm':
           // controlData.form.addControl('beforeDateInForm', new FormControl('', [Validators.required]));
           controlData.dynamicFields.push({
             name: 'beforeDateInForm',
-            type: 'select',
-            // others: controlData.getOtherDateFields(controlData.form.controls.name.value)
+            type: 'select'
           });
+          controlData.others = this.getOtherDateFields(controlData);
           break;
       }
     }
-    // this.cleanForm(controlData);
+    this.cleanForm(controlData);
   }
 
   cleanForm(controlData: ControlData) {
-    console.log(controlData.dynamicFields);
-    for (let index = 0; index < controlData.selectedValidators.length; index++) {
-      const element: string = controlData.selectedValidators[index];
-      if (element == 'name' || element == 'displayName' || element == 'options')
-        continue;
-
-      if (controlData.dynamicFields.filter(df => df.type == element).length == 0) {
-        console.log('removing ' + element);
-        let indexToDelete = controlData.dynamicFields.findIndex(df => df.type == element);
-        controlData.dynamicFields.splice(indexToDelete, 1);
+    //you need to check whether the new selected validators still exist in the dynamic fields
+    controlData.dynamicFields.forEach(df=>{
+      let indexInSelectedValidators = controlData.selectedValidators.findIndex(sv=>sv === df.name);    
+      if (indexInSelectedValidators === -1){
+        let indexToRemove = controlData.dynamicFields.findIndex(tempDF=>tempDF.name === df.name);
+        controlData.dynamicFields.splice(indexToRemove,1);
       }
-    }
-    controlData.form.updateValueAndValidity();
-    console.log(controlData.dynamicFields);
+    });
   }
 
-  getOtherDateFields(currentFieldName: string, form: FormGroup) {
-    let fieldNames = [];
+  getOtherDateFields(controlData: ControlData) {
 
-    let keys = Object.keys(form.controls);
-    // let keys = ['date of birth', 'visa expiry', 'hi'];
-    for (let index = 0; index < keys.length; index++) {
-      const element = keys[index];
-      if (element == form.controls.name.value)
-        continue;
-      else
-        fieldNames.push(element);
-      // fieldNames.push(element);
+    let controlsToSelectFrom: string[] = [];
 
+    this.addedControls.forEach(ad => {
+      if (ad.control.controlData.form.controls.name.value && controlData.form.controls.name.value) {
+        if (ad.control.controlData.form.controls.name.value != controlData.form.controls.name.value) {
+          controlsToSelectFrom.push(this.getControlName(ad.control.controlData));
 
-    }
-    return fieldNames;
+        }
+      }
+    });
+    console.log(controlsToSelectFrom);
+    return controlsToSelectFrom;
   }
 
   getControlValue(controlData: ControlData) {
@@ -191,25 +184,44 @@ export class SharedService {
       });
     }
 
-    if (controlData.type == "checkbox" || 
-    controlData.type == "select" ||
-    controlData.type == "radio") {
+    if (controlData.type == "checkbox" ||
+      controlData.type == "select" ||
+      controlData.type == "radio") {
 
-      if (controlData.fetchForm){
+      if (controlData.fetchFromAPI) {
         value.fetch = controlData.fetchFromAPI;
         value.api = controlData.fetchForm.controls.api.value;
         value.mapper = {};
         value.mapper.arguments = controlData.fetchForm.controls.arguments.value;
         value.mapper.body = controlData.fetchForm.controls.body.value;
-      }else{
+      } else {
         value.options = [];
         controlData.options.forEach(option => {
           value.options.push(option.getRawValue());
         });
       }
 
-      
+
     }
     return value;
+  }
+
+  getControlName(controlData:ControlData) : string{
+    if (controlData.form.controls.name.value && controlData.form.controls.displayName.value){
+      return controlData.form.controls.displayName.value + ' - ' + controlData.form.controls.name.value;
+    }else if (controlData.form.controls.name.value){
+      return controlData.form.controls.name.value
+    }else if (controlData.form.controls.displayName.value){
+      return controlData.form.controls.displayName.value
+    }
+  }
+
+  updateFormControlsAfterSettingNames(){
+    this.addedControls.forEach(ad=>{
+      console.log(ad.control.controlData.type);
+      if (ad.control.controlData.type === 'text' && ad.control.controlData.specificType === 'date'){
+        ad.control.controlData.others = this.getOtherDateFields(ad.control.controlData);
+      }
+    });
   }
 }
