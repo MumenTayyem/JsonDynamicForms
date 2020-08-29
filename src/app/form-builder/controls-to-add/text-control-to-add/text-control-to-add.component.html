@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <mat-accordion>
-            <mat-expansion-panel (opened)="controlData.panelOpenState = true"
+            <mat-expansion-panel [expanded]='controlData.panelOpenState' (opened)="controlData.panelOpenState = true"
                 (closed)="controlData.panelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title>

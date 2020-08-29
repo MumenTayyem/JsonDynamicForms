@@ -52,9 +52,9 @@ export class SharedService {
   handleDynamicFields(controlData: ControlData) {
 
     if (!controlData.selectedValidators)
-    return;
-    controlData.isRequired = controlData.selectedValidators.indexOf('required')>-1
-      || controlData.selectedValidators.indexOf('atLeastOne')>-1?true:false;
+      return;
+    controlData.isRequired = controlData.selectedValidators.indexOf('required') > -1
+      || controlData.selectedValidators.indexOf('atLeastOne') > -1 ? true : false;
 
     for (let index = 0; index < controlData.selectedValidators.length; index++) {
       const f = controlData.selectedValidators[index];
@@ -140,11 +140,11 @@ export class SharedService {
 
   cleanForm(controlData: ControlData) {
     //you need to check whether the new selected validators still exist in the dynamic fields
-    controlData.dynamicFields.forEach(df=>{
-      let indexInSelectedValidators = controlData.selectedValidators.findIndex(sv=>sv === df.name);    
-      if (indexInSelectedValidators === -1){
-        let indexToRemove = controlData.dynamicFields.findIndex(tempDF=>tempDF.name === df.name);
-        controlData.dynamicFields.splice(indexToRemove,1);
+    controlData.dynamicFields.forEach(df => {
+      let indexInSelectedValidators = controlData.selectedValidators.findIndex(sv => sv === df.name);
+      if (indexInSelectedValidators === -1) {
+        let indexToRemove = controlData.dynamicFields.findIndex(tempDF => tempDF.name === df.name);
+        controlData.dynamicFields.splice(indexToRemove, 1);
       }
     });
   }
@@ -166,6 +166,51 @@ export class SharedService {
   }
 
   getControlValue(controlData: ControlData) {
+
+    let basicInfoInvalid = false;
+    let dynamicFieldsInvalid = false;
+    let optionsInvalid = false;
+
+    if (controlData.form.invalid) {
+      basicInfoInvalid = true;
+      controlData.form.markAllAsTouched();
+      controlData.form.markAsDirty();
+    }
+
+    controlData.dynamicFields.forEach(ad => {
+      if (ad.form.invalid) {
+        dynamicFieldsInvalid = true;
+        ad.form.markAllAsTouched();
+        ad.form.markAsDirty();
+      }
+    });
+
+    if (controlData.fetchFromAPI !== null || controlData.fetchFromAPI !== undefined) {
+
+
+      if (controlData.fetchFromAPI === true) {
+        if (controlData.fetchForm.invalid) {
+          optionsInvalid = true;
+          controlData.fetchForm.markAllAsTouched();
+          controlData.fetchForm.markAsDirty();
+        }
+      } else {
+
+        controlData.options.forEach(optionForm => {
+          if (optionForm.invalid) {
+            optionsInvalid = true;
+            optionForm.markAllAsTouched();
+            optionForm.markAsDirty();
+          }
+        });
+      }
+    }
+
+    if (basicInfoInvalid || dynamicFieldsInvalid || optionsInvalid) {
+      controlData.panelOpenState = true;
+      return;
+    }
+
     let value = Object.assign({}, controlData.form.getRawValue());
     delete value.errorMessage;
 
@@ -206,20 +251,20 @@ export class SharedService {
     return value;
   }
 
-  getControlName(controlData:ControlData) : string{
-    if (controlData.form.controls.name.value && controlData.form.controls.displayName.value){
+  getControlName(controlData: ControlData): string {
+    if (controlData.form.controls.name.value && controlData.form.controls.displayName.value) {
       return controlData.form.controls.displayName.value + ' - ' + controlData.form.controls.name.value;
-    }else if (controlData.form.controls.name.value){
+    } else if (controlData.form.controls.name.value) {
       return controlData.form.controls.name.value
-    }else if (controlData.form.controls.displayName.value){
+    } else if (controlData.form.controls.displayName.value) {
       return controlData.form.controls.displayName.value
     }
   }
 
-  updateFormControlsAfterSettingNames(){
-    this.addedControls.forEach(ad=>{
+  updateFormControlsAfterSettingNames() {
+    this.addedControls.forEach(ad => {
       console.log(ad.control.controlData.type);
-      if (ad.control.controlData.type === 'text' && ad.control.controlData.specificType === 'date'){
+      if (ad.control.controlData.type === 'text' && ad.control.controlData.specificType === 'date') {
         ad.control.controlData.others = this.getOtherDateFields(ad.control.controlData);
       }
     });

@@ -21,7 +21,7 @@
         </mat-form-field>
         <mat-form-field>
             <mat-label>Mapper function body</mat-label>
-            <textarea matInput formControlName='body'></textarea>
+            <textarea matInput formControlName='body' rows='4'></textarea>
             <mat-error *ngIf="controlData.fetchForm.controls.body.errors">
                 This field is <strong>required</strong>
             </mat-error>

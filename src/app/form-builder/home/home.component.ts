@@ -46,7 +46,8 @@ export class HomeComponent implements OnInit {
       control.control.controlData.dynamicFields.forEach(df=>{
         df.form.markAllAsTouched();
       });
-      this.json.push(this.sharedService.getControlValue(control.control.controlData));
+      this.sharedService.getControlValue(control.control.controlData)
+      // this.json.push(this.sharedService.getControlValue(control.control.controlData));
     });
     console.log(this.json);
   }
