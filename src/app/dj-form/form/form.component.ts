@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {FormGroup} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { TextComponent } from '../types/text/text.component';
 import { HostDirective } from '../directives/host.directive';
 import { Subject } from 'rxjs';
@@ -14,31 +14,27 @@ import { Subject } from 'rxjs';
 export class FormComponent implements OnInit {
 
   @Input() FromSchemaPath;
- 
+
 
   public formJsonFields;
 
-  group:FormGroup;
-  isSubmitted:Subject<boolean>;
-
-  constructor(private http: HttpClient, private cdr:ChangeDetectorRef) { }
+  group: FormGroup;
+  isSubmitted: Subject<boolean>;
+  title:string='';
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
 
-    this.isSubmitted=new Subject<boolean>();
+    this.isSubmitted = new Subject<boolean>();
 
     this.group = new FormGroup({});
     this.getJSON().subscribe(res => {
       this.formJsonFields = res['fields'];
+      this.title=res['formName'];
       this.cdr.detectChanges();
       this.group.updateValueAndValidity();
       //date validators not working
-      
-      this.group.controls['date'].valueChanges.subscribe(res=>{
-        // console.log(res);
-        // this.group.controls['date'].updateValueAndValidity();
-        // console.log(this.group.controls['date'].errors);
-      });
+
 
     },
       (err) => console.log('File does not exist!'))
@@ -49,19 +45,19 @@ export class FormComponent implements OnInit {
 
   }
 
-  buildComponent(){
-    
+  buildComponent() {
+
   }
 
-  printControls(){
-    console.log(this.group.errors);
+  printControls() {
     // // console.log(this.group.controls['favouriteAnimals']);
     // console.log(this.group.controls);
-    if (this.group.valid){
-
-    }else{
+    if (this.group.valid) {
+      console.log(this.group.value);
+    } else {
       this.isSubmitted.next(true);
       this.group.markAllAsTouched();
+      console.log(this.group.errors);
     }
     // // console.log(this.group.getRawValue());
     // console.log(this.group.controls['date'].errors);
