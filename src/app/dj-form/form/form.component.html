@@ -1,11 +1,10 @@
+<h3>{{title}}</h3>
 <div *ngIf='formJsonFields'>
   <div *ngFor='let field of formJsonFields'>
-    <dj-form-control-host  [customFormGroup]='group' [isSubmitted]='isSubmitted' [controlInfo]='field'>
+    <dj-form-control-host [customFormGroup]='group' [isSubmitted]='isSubmitted' [controlInfo]='field'>
     </dj-form-control-host>
   </div>
-    
-    
-  </div>
+</div>
 <div>
   <!-- <button (click)='printControls()'>Print!</button> -->
   <button mat-raised-button color="primary" (click)='printControls()'>Submit</button>

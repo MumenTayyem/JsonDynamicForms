@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {FormGroup} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { TextComponent } from '../types/text/text.component';
 import { HostDirective } from '../directives/host.directive';
 import { Subject } from 'rxjs';
@@ -15,46 +15,36 @@ export class FormComponent implements OnInit {
 
   @Input() FromSchemaPath;
   @Input() json;
- 
+
+
 
   public formJsonFields;
 
-  group:FormGroup;
-  isSubmitted:Subject<boolean>;
-
-  constructor(private http: HttpClient, private cdr:ChangeDetectorRef) { }
+  group: FormGroup;
+  isSubmitted: Subject<boolean>;
+  title: string = '';
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
 
-    this.isSubmitted=new Subject<boolean>();
+    this.isSubmitted = new Subject<boolean>();
 
     this.group = new FormGroup({});
-    // this.getJSON().subscribe(res => {
-    //   this.formJsonFields = res['fields'];
-    //   this.cdr.detectChanges();
-    //   this.group.updateValueAndValidity();
-    //   //date validators not working
-      
-    //   this.group.controls['date'].valueChanges.subscribe(res=>{
-    //     // console.log(res);
-    //     // this.group.controls['date'].updateValueAndValidity();
-    //     // console.log(this.group.controls['date'].errors);
-    //   });
 
-    // },
-    //   (err) => console.log('File does not exist!'))
-    let res = this.json;
-    this.formJsonFields = res;
+    if (this.json) {
+      let res = this.json;
+      this.formJsonFields = res;
       this.cdr.detectChanges();
       this.group.updateValueAndValidity();
-      //date validators not working
-      
-      // this.group.controls['date'].valueChanges.subscribe(res=>{
-      //   // console.log(res);
-      //   // this.group.controls['date'].updateValueAndValidity();
-      //   // console.log(this.group.controls['date'].errors);
-      // });
-
+    } else {
+      this.getJSON().subscribe(res => {
+        this.formJsonFields = res['fields'];
+        this.title = res['formName'];
+        this.cdr.detectChanges();
+        this.group.updateValueAndValidity();
+      },
+        (err) => console.log('File does not exist!'))
+    }
   }
 
   public getJSON() {
@@ -63,22 +53,14 @@ export class FormComponent implements OnInit {
   }
 
 
-  buildComponent(){
-    
-  }
-
-  printControls(){
-    console.log(this.group.errors);
-    // // console.log(this.group.controls['favouriteAnimals']);
-    // console.log(this.group.controls);
-    if (this.group.valid){
-
-    }else{
+  printControls() {
+    if (this.group.valid) {
+      console.log(this.group.value);
+    } else {
       this.isSubmitted.next(true);
-      // this.group.markAllAsTouched();
+      this.group.markAllAsTouched();
+      console.log(this.group.errors);
     }
-    // // console.log(this.group.getRawValue());
-    // console.log(this.group.controls['date'].errors);
   }
 
 }

@@ -1,18 +1,18 @@
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-8">
     <div cdkDropListGroup>
       <div class="example-container">
-        <h2>Available Form Controls</h2>
-  
+        <h4>Available Form Controls</h4>
+
         <div cdkDropList [cdkDropListData]="controls" class="example-list" sortingDisabled='true'>
           <div class="example-box" *ngFor="let control of controls" cdkDrag>{{control | titlecase}}</div>
         </div>
       </div>
-  
-  
+
+
       <div class="example-container">
-        <h2>Selected Form Controls</h2>
-  
+        <h4>Selected Form Controls</h4>
+
         <div cdkDropList [cdkDropListData]="selectedControls" class="example-list" (cdkDropListDropped)="drop($event)">
           <div class="example-box" *ngFor="let control of selectedControls" cdkDrag>
             <div class="row">
@@ -21,20 +21,20 @@
               </div>
             </div>
           </div>
-          <div *ngIf='selectedControls.length == 0' class="example-box">{{'zero controls are selected' | titlecase}}</div>
+          <div *ngIf='selectedControls.length == 0' class="example-box">{{'zero controls are selected' | titlecase}}
+          </div>
         </div>
         <button class="generateFormBtn" mat-raised-button color="primary" (click)='print()'>Generate Form!</button>
       </div>
     </div>
   </div>
-</div>
-<div *ngIf='json.length>0'>
-  <div class="row">
-    <!-- <div class="col-lg-6">
-      {{json | json}}
-    </div> -->
-    <div class="col-lg-6">
-      <dj-form [json]='json'></dj-form>
+  <div class="col-lg-4" *ngIf='json.length>0'>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h4>Your Form</h4>
+        <dj-form [json]='json'></dj-form>
+      </div>
     </div>
   </div>
 </div>

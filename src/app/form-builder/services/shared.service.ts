@@ -196,19 +196,21 @@ export class SharedService {
         }
       } else {
 
-        controlData.options.forEach(optionForm => {
-          if (optionForm.invalid) {
-            optionsInvalid = true;
-            optionForm.markAllAsTouched();
-            optionForm.markAsDirty();
-          }
-        });
+        if (controlData.options){
+          controlData.options.forEach(optionForm => {
+            if (optionForm.invalid) {
+              optionsInvalid = true;
+              optionForm.markAllAsTouched();
+              optionForm.markAsDirty();
+            }
+          });
+        }
       }
     }
 
     if (basicInfoInvalid || dynamicFieldsInvalid || optionsInvalid) {
       controlData.panelOpenState = true;
-      return;
+      return null;
     }
 
     let value = Object.assign({}, controlData.form.getRawValue());
