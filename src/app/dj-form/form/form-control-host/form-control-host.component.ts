@@ -73,7 +73,7 @@ export class FormControlHostComponent implements OnInit {
           validators.push(Validators.min(validation.value));
           break;
         case 'max':
-          validators.push(Validators.min(validation.value));
+          validators.push(Validators.max(validation.value));
           break;
         case 'maxLength':
           validators.push(Validators.maxLength(validation.value));
