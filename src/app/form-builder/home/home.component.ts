@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem,copyArrayItem} from '@angular/cdk/drag-drop';
+import { Component, OnInit, ViewChildren, QueryList, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import {CdkDragDrop, moveItemInArray, transferArrayItem,copyArrayItem, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
 import { ControlToAddComponent } from '../control-to-add/control-to-add.component';
 import { SharedService } from '../services/shared.service';
 import { ControlData, DynamicField } from '../models/controlData.model';
@@ -11,6 +11,7 @@ import { ControlData, DynamicField } from '../models/controlData.model';
 })
 export class HomeComponent implements OnInit {
 
+  
   constructor(private sharedService:SharedService,private crd:ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -29,7 +30,6 @@ export class HomeComponent implements OnInit {
   json=[];
   @ViewChildren('addedControl') addedControls !: QueryList<ControlToAddComponent>;
 
-
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -38,6 +38,14 @@ export class HomeComponent implements OnInit {
       copyArrayItem(event.previousContainer.data,event.container.data,event.previousIndex,event.currentIndex);
       this.sharedService.addedControls = this.addedControls;
     }
+  }
+
+  removeControl(index:number){
+
+    let currentItems = this.addedControls.toArray();
+    currentItems.splice(index,1);
+    this.addedControls.reset(currentItems);
+    this.selectedControls.splice(index,1);
   }
 
   print(){
