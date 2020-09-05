@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { DJFormModule } from './dj-form/dj-form.module';
@@ -7,6 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './form-builder/layout/layout.component';
 import { HomeComponent } from './form-builder/home/home.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { PromptComponentComponent } from './prompt-component/prompt-component.component';
+import { PwaService } from './services/pwa.service';
+import { MatIconModule, MatToolbarModule, MatBottomSheet, MatSnackBarModule, MatBottomSheetModule } from '@angular/material';
+
+const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
 const routes:Routes = [
   {
@@ -21,16 +28,23 @@ const routes:Routes = [
 ];
 
 @NgModule({
+  entryComponents:[PromptComponentComponent],
   declarations: [
-    AppComponent
+    AppComponent,
+    PromptComponentComponent
   ],
   imports: [
     BrowserModule,
     DJFormModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes)
+    MatIconModule,
+    MatToolbarModule,
+    MatBottomSheetModule,
+    RouterModule.forRoot(routes),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{provide: APP_INITIALIZER, useFactory: initializer, deps: [PwaService], multi: true},],
+  bootstrap: [AppComponent],
+  // exports:[MatBottomSheet]
 })
 export class AppModule { }

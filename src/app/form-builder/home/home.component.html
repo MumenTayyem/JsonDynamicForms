@@ -2,13 +2,13 @@
   <div class="col-lg-8 col-md-8 col-sm-12">
     <div cdkDropListGroup>
       <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="col-lg-5 col-md-5 col-sm-12">
           <h5>Available Form Controls</h5>
           <div cdkDropList [cdkDropListData]="controls" class="example-list" sortingDisabled='true'>
             <div class="example-box" *ngFor="let control of controls" cdkDrag>{{control | titlecase}}</div>
           </div>
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-12">
+        <div class="col-lg-7 col-md-7 col-sm-12">
           <h5>Selected Form Controls</h5>
           <div cdkDropList [cdkDropListData]="selectedControls" class="example-list"
             (cdkDropListDropped)="drop($event)">

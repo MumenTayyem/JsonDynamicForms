@@ -1,7 +1,7 @@
-<div *ngIf='isLoading'>
+<div >
   <mat-spinner style="margin: auto;"></mat-spinner>
 </div>
-<form [formGroup]='customFormGroup' *ngIf='!isLoading'>
+<form [formGroup]='customFormGroup' >
   <label color='secondary'
     [ngClass]="{'error animate__animated animate__fadeIn animate__faster 500ms':(isSubmittedFlag || customFormGroup.controls[name].touched ) && customFormGroup.controls[name].invalid}">{{displayName}}</label>
   <mat-radio-group class="example-radio-group" [formControlName]='name'>
